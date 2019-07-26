@@ -1,0 +1,53 @@
+<nav class="header-navbar">
+  <div id="header">
+
+    <img style="margin-top:15px; margin-left:10px; width:80px; height:44px; vertical-align: middle;" src="/images/logo.png" />
+    <span class="text1">Cloud</span>
+    <span class="text2">Path</span>
+
+    <ol class="header-nav pull-right">
+      <li *ngIf="isLoggedIn()">
+        <a *ngIf="isLoggedIn()" (click)="onLogout()">Logout</a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/auth/signin" routerLinkActive="active" *ngIf="!isLoggedIn()">Sign In</a>
+      </li>
+      <li class="ordered">
+        <a routerLink="/help" routerLinkActive="active">Help</a>
+      </li>
+      <li *ngIf="isLoggedIn()">
+        <a *ngIf="isLoggedIn()" (click)="manageAccount()">My Account</a>
+      </li>
+      <li class="ordered">
+        <a routerLink="/assumptions" routerLinkActive="active">Assumptions</a>
+      </li>
+      <li class="ordered" *ngIf="isAdmin()">
+        <a routerLink="/allPricing" *ngIf="isAdmin()" routerLinkActive="active">Pricing</a>
+      </li>
+      <!-- <li class="ordered" *ngIf="isAdmin()">
+        <a routerLink="/EditMigrationGoals" *ngIf="isAdmin()" routerLinkActive="active">Cloud Benefits</a>
+      </li>
+      <li class="ordered" *ngIf="isAdmin()">
+        <a routerLink="/EditBarriers" *ngIf="isAdmin()" routerLinkActive="active">Cloud Barriers</a>
+      </li> -->
+      <!-- <li class="ordered" *ngIf="isAdmin()"><a routerLink="/bby" *ngIf="isAdmin()" routerLinkActive="active">Admin</a></li> -->
+      
+      <li class="ordered dropdown" *ngIf="isAdmin()">
+        <a class = "dropdown-toggle"  data-toggle="dropdown"  *ngIf="isAdmin()" ><span class="caret"></span>Admin</a>
+        <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="#" routerLink="/bby" routerLinkActive="active">Edit BBY Pricing</a></li>
+            <li><a tabindex="-1" href="#" routerLink="/EditBarriers" routerLinkActive="active">Edit Cloud Barriers</a></li>
+            <li><a tabindex="-1" href="#"routerLink="/EditMigrationGoals" routerLinkActive="active">Edit Cloud Benefits</a></li>      
+          </ul>
+      </li>
+
+      <li class="ordered">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="greeting">
+        <small>{{ firstName | async}} </small>
+      </li>
+    </ol>
+
+  </div>
+</nav>

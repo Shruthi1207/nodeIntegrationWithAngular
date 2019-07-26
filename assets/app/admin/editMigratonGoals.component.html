@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <h3>Edit Cloud Benefits</h3>
+    <div class="row" *ngFor="let barrier of infraBarriers">
+        
+        <label>{{barrier.text}}</label>
+       
+    </div>
+    <ng2-smart-table style='font-size:110%; border:"1"'   (deleteConfirm)="onDeleteConfirm($event)"
+    (editConfirm)="onSaveConfirm($event)"
+    (createConfirm)="onCreateConfirm($event)" [settings]="settings" [source]="source"  ></ng2-smart-table>
+    
+</div>

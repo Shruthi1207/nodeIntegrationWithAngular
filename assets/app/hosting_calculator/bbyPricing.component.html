@@ -1,0 +1,182 @@
+<div class="loader" *ngIf="loading"></div>
+<div class="container" *ngIf="!loading && isInitialized">
+    <h4><font color="#db991e"><b>BBY Units Pricing</b></font></h4>
+    
+    <div class="alert alert-success" *ngIf="success">
+            <strong>BBY pricing Details stored/updated successfully!!</strong></div>
+    <div class="alert alert-success" *ngIf="refresh && !loading">
+            <strong>AWS pricing Details refreshed successfully!!</strong></div>
+    <br>
+    <form [formGroup]="bbyGroup" (ngSubmit)="onSubmit()">
+    <h5><font color="#db991e">VM Compute</font></h5>
+    <table style="width:50%" >
+            <tr>
+                <th>Size</th>
+                <th>CentOS ($/hr)</th> 
+                <th>RHEL ($/hr)</th>
+                <th>Windows ($/hr)</th>
+                <th>VM ONLY ($/hr)</th>
+            </tr>
+            <tr>
+                <td><b>S</b></td>
+                <td><input type="text" id="2" formControlName="centos1" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['centos1'].valid || bbyGroup.controls['centos1'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="3" formControlName="RH1" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH1'].valid || bbyGroup.controls['RH1'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="4" formControlName="W1" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W1'].valid || bbyGroup.controls['W1'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="4a" formControlName="VM1" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['VM1'].valid || bbyGroup.controls['VM1'].pristine" class="alert-danger"> Field is required.</div></td>
+                        
+            </tr>
+            <tr>
+                <td><b>M</b></td>
+                <td><input type="text" id="6" formControlName="centos2" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos2'].valid || bbyGroup.controls['centos2'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="7" formControlName="RH2" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH2'].valid || bbyGroup.controls['RH2'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="8" formControlName="W2" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W2'].valid || bbyGroup.controls['W2'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="8a" formControlName="VM2" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['VM2'].valid || bbyGroup.controls['VM2'].pristine" class="alert-danger"> Field is required.</div></td>    
+            </tr>
+            <tr>
+                <td><b>L</b></td>
+                <td><input type="text" id="10" formControlName="centos3" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos3'].valid || bbyGroup.controls['centos3'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="11" formControlName="RH3" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH3'].valid || bbyGroup.controls['RH3'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="12" formControlName="W3" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W3'].valid || bbyGroup.controls['W3'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="12a" formControlName="VM3" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['VM3'].valid || bbyGroup.controls['VM3'].pristine" class="alert-danger"> Field is required.</div></td>
+            </tr>
+            <tr>
+                <td><b>XL</b></td>
+                <td><input type="text" id="14" formControlName="centos4" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos4'].valid || bbyGroup.controls['centos4'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="15" formControlName="RH4" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH4'].valid || bbyGroup.controls['RH4'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="16" formControlName="W4" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W4'].valid || bbyGroup.controls['W4'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="16a" formControlName="VM4" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['VM4'].valid || bbyGroup.controls['VM4'].pristine" class="alert-danger"> Field is required.</div></td>
+            </tr>
+            <tr>
+                <td><b>XXL</b></td>
+                <td><input type="text" id="18" formControlName="centos5" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos5'].valid || bbyGroup.controls['centos5'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="19" formControlName="RH5" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH5'].valid || bbyGroup.controls['RH5'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="20" formControlName="W5" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W5'].valid || bbyGroup.controls['W5'].pristine" class="alert-danger"> Field is required.</div></td>
+                    <td><input type="text" id="20a" formControlName="VM5" class="input-style"><br>
+                        <div [hidden]="bbyGroup.controls['VM5'].valid || bbyGroup.controls['VM5'].pristine" class="alert-danger"> Field is required.</div></td>
+            </tr>
+            <tr>
+                <td><b>XXXL</b></td>
+                <td><input type="text" id="22" formControlName="centos6" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos6'].valid || bbyGroup.controls['centos6'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="23" formControlName="RH6" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH6'].valid || bbyGroup.controls['RH6'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="24" formControlName="W6" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W6'].valid || bbyGroup.controls['W6'].pristine" class="alert-danger"> Field is required.</div></td>
+                    <td><input type="text" id="24a" formControlName="VM6" class="input-style"><br>
+                        <div [hidden]="bbyGroup.controls['VM6'].valid || bbyGroup.controls['VM6'].pristine" class="alert-danger"> Field is required.</div></td>                    
+            </tr>
+            <tr>
+                <td><b>Jumbo</b></td>
+                <td><input type="text" id="22a" formControlName="centos7" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['centos7'].valid || bbyGroup.controls['centos7'].pristine" class="alert-danger"> Field is required.</div></td> 
+                <td><input type="text" id="23b" formControlName="RH7" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['RH7'].valid || bbyGroup.controls['RH7'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="24c" formControlName="W7" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['W7'].valid || bbyGroup.controls['W7'].pristine" class="alert-danger"> Field is required.</div></td>
+                <td><input type="text" id="24ca" formControlName="VM7" class="input-style"><br>
+                    <div [hidden]="bbyGroup.controls['VM7'].valid || bbyGroup.controls['VM7'].pristine" class="alert-danger"> Field is required.</div></td>
+            </tr>
+    </table>
+    <br>
+    <h5><font color="#db991e">Storage $/GB-month</font></h5>
+    <table style="width:50%" >
+        <!-- <tr>
+            <td><b>SAN Perf</b></td>
+            <td><input type="text" id="25" formControlName="Sperf" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['Sperf'].valid || bbyGroup.controls['Sperf'].pristine" class="alert-danger"> Field is required.</div></td> 
+        </tr> -->
+        <tr>
+            <td><b>SAN</b></td>
+            <td><input type="text" id="26" formControlName="San" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['San'].valid || bbyGroup.controls['San'].pristine" class="alert-danger"> Field is required.</div></td> 
+        </tr>
+        <tr>
+            <td><b>NAS</b></td>
+            <td><input type="text" id="27" formControlName="NAS" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['NAS'].valid || bbyGroup.controls['NAS'].pristine" class="alert-danger"> Field is required.</div></td> 
+        </tr>
+        <tr>
+            <td><b>Object</b></td>
+            <td><input type="text" id="28" formControlName="Obj" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['Obj'].valid || bbyGroup.controls['Obj'].pristine" class="alert-danger"> Field is required.</div></td> 
+        </tr>
+        <tr>
+            <td><b>Backup</b></td>
+            <td><input type="text" id="29" formControlName="Bkup" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['Bkup'].valid || bbyGroup.controls['Bkup'].pristine" class="alert-danger"> Field is required.</div></td> 
+        </tr>
+</table>
+    <br>
+    <h5><font color="#db991e">Discounts (%)</font></h5>
+    <table style="width:50%" >
+        <tr>
+            <th>Azure</th>
+            <td><input type="text" id="30" formControlName="azureDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['azureDis'].valid || bbyGroup.controls['azureDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+        <tr>
+            <th>AWS</th>
+            <td><input type="text" id="31" formControlName="awsDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['awsDis'].valid || bbyGroup.controls['awsDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+        <tr>
+            <th>GCP</th>
+            <td><input type="text" id="32" formControlName="gcpDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['gcpDis'].valid || bbyGroup.controls['gcpDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+        <tr>
+            <th>RI Discount Azure</th>
+            <td><input type="text" id="30" formControlName="riazureDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['riazureDis'].valid || bbyGroup.controls['riazureDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+        <tr>
+            <th>RI Discount AWS</th>
+            <td><input type="text" id="31" formControlName="riawsDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['riawsDis'].valid || bbyGroup.controls['riawsDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+        <tr>
+            <th>SU Discount GCP</th>
+            <td><input type="text" id="32" formControlName="sugcpDis" class="input-style"><br>
+                <div [hidden]="bbyGroup.controls['sugcpDis'].valid || bbyGroup.controls['sugcpDis'].pristine" class="alert-danger"> Field is required.</div></td>
+        </tr>
+    </table>
+    <br>
+   
+        <h5><font color="#db991e">OS Price Source</font></h5>
+    
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <input type="radio" formControlName="OSPriceSource" value="1"> Use BBY OS Pricing &nbsp;&nbsp;
+            <input type="radio" formControlName="OSPriceSource" value="2"> Use CSP OS Pricing
+        </div>
+    </div>
+    <h5><font color="#db991e">BBY Private Cloud  Elasticity Savings (%)</font></h5><input type="text" id="35" formControlName="bes" class="input-style"><br><div [hidden]="bbyGroup.controls['bes'].valid || bbyGroup.controls['bes'].pristine" class="alert-danger" style="width: 175px;"> Field is required.</div>
+    <br>
+    <h5><font color="#db991e">DBaaS Savings (%)</font></h5><input type="text" id="33" formControlName="paas" class="input-style"><br><div [hidden]="bbyGroup.controls['paas'].valid || bbyGroup.controls['paas'].pristine" class="alert-danger" style="width: 175px;"> Field is required.</div>
+    <br><br>
+    <!-- <h5><font color="#db991e">Depreciation Term (Yrs)</font></h5><input type="text" id="34" formControlName="dep" class="input-style"><br><div [hidden]="bbyGroup.controls['dep'].valid || bbyGroup.controls['dep'].pristine" class="alert-danger" style="width: 175px;"> Field is required.</div>
+    <br><br> -->
+    <!-- <button type="button" class="btn btn-primary" (click)="AutoRefresh()">Auto Refresh AWS Pricing</button>
+    <br><br> -->
+    <button class="btn btn-primary" [disabled]="!bbyGroup.valid" type="submit">Save</button>
+</form>
+</div>

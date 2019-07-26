@@ -1,0 +1,69 @@
+<div class="container">
+        <h3><u>Tool provides following capabilities</u></h3><br>
+        <h4><u><font color="#db991e">The list below identifies capabilities for initial release of this tool. This tool provides…</font></u></h4>
+                <ol>
+                    <li>...directional recommendation of whether or not a Best Buy application can be hosted on a Public Cloud. This recommendation will be based on cloud adoption barriers and the application team's migration goals.</li>
+                    <li>...a rough monthly cost of hosting the application in a Best Buy data center compared to a Cloud Service Provider (CSP) in a like-for-like comparison. The comparison will be based on categories and units defined by Best Buy (please see the Assumptions section for categories and units).</li>
+                    <li>…an estimate of potential savings when utilizing auto-scaling features available from major CSPs to accommodate spikes in workload demand (eliminate overprovisioning through "Replatforming for Elasticity").</li>
+                    <li>…an estimate of potential savings when selecting DBaaS (PaaS) for database hosting as an alternative to hosting DB on virtual machine instances (IaaS).</li>
+                    <li>…an estimate of cost of depreciation for both compute and storage based on a Best Buy provided start date and a 5 year refresh cycle.</li>
+                    <li>…an estimate of potential savings when selecting reserved vs on-demand instances for the compute part of hosting on the cloud.</li>
+                </ol>
+                <hr>
+        <h3><u>Tool does not address following capabilities</u></h3><br>
+                <ol>
+                    <li>Application modernization and associated future cost savings are not included in cost calculations.</li>
+                    <li>This tool does not include any cost of transformation of the application or work required to perform the migration itself. </li>
+                    <li>Any recommendations and calculations not explicitly included or described under Tool Capabilities section are not addressed by the tool. </li>
+                </ol>
+                <hr>
+        <h3><u>Assumptions</u></h3><br>
+        <h4><u><font color="#db991e">Cloud Barriers</font></u></h4>
+                <ol>
+                    <li>The cloud barriers defined in the tool are fixed. </li>
+                    <li>Security, Legal, Data, and any other relevant governance teams have previously approved the usage of the cloud as a new hosting platform and provided approval for the application to be hosted in a specific CSP.</li>
+                    <li>Any additional services such as Infrastructure, Middleware, Monitoring, Security, and IAM already exist in the cloud.</li>
+                </ol>
+                <br>
+        <h4><u><font color="#db991e">Cloud Benefits</font></u></h4>
+                <ol>
+                    <li>The Cloud benefits defined in the tool are fixed. </li>
+                </ol>
+                <br>
+        <h4><u><font color="#db991e">Hosting Calculator</font></u></h4><br>
+        Monthly Hosting Cost is based on following 4 categories and their corresponding units:
+                <ol>
+                    <li><b>Compute</b><br> - calculations are based on predefined list of VM types based on memory size and number of cores.<br>
+                            - Elastic infrastructure costs will be calculated for the year and averaged per month.
+                    </li>
+                    <li><b>Storage </b><br> - calculations are based on the type and amount of consumed storage (in GB) by the application. <br>
+                        - The storage pricing will be rounded up to the closest available pre-defined size of the SSD drives available on each CSP.<br>
+                        - Performance requirements (IOPS) are not being considered and a performance assessment is not being conducted; only the capacity requirements are used for storage cost calculations.<br>
+                        - All Best Buy SAN storage (SSD and non-SSD) will be matched to CSP's SSD Tier Pricing as requested by Best Buy.
+                    </li>
+                    <li><b>Network  </b><br> - calculations are based on a per VM cost defined by Best Buy as one Network Unit. Since CSPs determine network cost based on the size of outgoing data/traffic, Best Buy will provide an estimate for amount of outgoing traffic per application per month rounded to predefined ranges. <br>
+                        - Cloud network services are calculated based on estimates provided by Best Buy.<br>
+                        - The cost of shared network services in the cloud (Direct Connect, Gateways, etc.) is not included. The final network cost per VM maybe higher or lower due to distributed shared cost.
+                    </li>
+                    <li><b>Database   </b><br> - calculations are based on licensing model for each DB technology. SQL and Oracle: cost per core. Cassandra and Hadoop: cost per host. Since Best Buy will utilize a Bring Your Own License option, pricing for DB is only collected and used to provide basis for savings achieved when migrating to DBaaS.
+                    </li>
+                    <li>This tool will account for "On Demand" and "Reserved Instances" virtual machines (average discount percentages for each cloud provider). Other cloud provider discounts may be applicable, but will not be included in this calculation. Best Buy will have an option to adjust the average discount percentage.
+                    </li>
+                    <li>Operational support cost will remain the same as current cost at Best Buy, regardless of the deployment model.
+                    </li>
+                    <li>Application software licensing cost (except for the OS) will be considered the same as current cost at Best Buy, regardless of the cloud provider chosen.
+                    </li>
+                    <li>Network in the cloud is software-defined and not all traditional tools may continue working so redesign/adjustment may be required. This tool does not account for the cost of the redesign/adjustment.
+                    </li>
+                    <li>Monthly infrastructure cost will vary after performing application modernization.
+                    </li>
+                </ol>
+                <br>
+                <h4><u><font color="#db991e">Summary</font></u></h4><br>
+                <ol>
+                    <li>Total cost estimate is based on data provided by Best Buy.</li>
+                    <li>Application decision matrix will not differentiate between "Best Buy data center" and "Private Cloud". While virtualized, the Best Buy data center will not be considered as a Private Cloud. This tool is not considering Private Cloud as a deployment model for any of the cloud services.</li>
+                </ol>
+                <hr>
+                <br><br>
+</div>

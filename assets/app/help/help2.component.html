@@ -1,0 +1,163 @@
+<div class="container">
+    <h3>Section 2 - Cloud Barriers</h3><br>
+    <h4>INFRASTRUCTURE - Does the application have any of the following conditions?</h4>
+    <small>
+        <table style="width:100%">
+                <tr>
+                        <th><font color="#db991e">The server that is hosting the application or its components cannot be virtualized</font></th>
+                      </tr>
+                      <tr>
+                        <td>
+                                If, for any reason, the application or its components are not and cannot be virtualized, migrating them to Cloud as-is will not be possible.
+                        </td>  
+                      </tr>
+                      <tr>
+                            <th><font color="#db991e">OS NOT supported on cloud</font></th>
+                          </tr>
+                          <tr>
+                            <td>
+                                    Windows 2003: Azure, AWS <br>
+                                    Windows 2008 R2 or Later: Azure, AWS, and GCP<br><br>
+                                    RHEL 5.0: GCP<br>
+                                    RHEL 5.1 - 5.11 or  6.1 - 6.6: AWS and GCP<br>
+                                    RHEL 6.7+, 7.1+: Azure, AWS, and GCP<br><br>
+                                    CentOS 6.0: AWS, GCP<br>
+                                    CentOS: 6.1-6.2: GCP<br>
+                                    CentOS 6.3+: Azure, AWS, GCP<br>
+                                    CentOS 7.0 : Azure, AWS, GCP<br>
+                                    CentOS 7.1-7.2 : Azure, GCP<br>
+                                    CentOS 7.3+: Azure, AWS, GCP
+                            </td>  
+                          </tr>
+                          <tr>
+                                <th><font color="#db991e">Application requires better than 99.95% monthly uptime (high availability / SLA), corresponding to approximately 22 minutes of downtime per month.</font></th>
+                              </tr>
+                              <tr>
+                                <td>
+                                        When it comes to Cloud, assumption should be made that your infrastructure will eventually fail and any High Availability (HA) and Fault Tolerance (FT) requirements application might have should be architected at Application Layer.
+                                        If your application relies on SLA of the Data Center Infrastructure and requires over 99.95% uptime – re-hosting as-is is not an option since all 3 CSPs have SLAs of 99.95% for their IaaS VMs and only when properly configured.
+                                </td>  
+                              </tr>
+                              <tr>
+                                    <th><font color="#db991e">Application has hardware dependencies (i.e. architected to use a specific GPU (graphic process unit) or network card, uses hardware encryption, uses a hardware XML accelerator, etc.)</font></th>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                            Whether the software stack involved will work in a virtual machine environment may depend on whether there is use of specialized device drivers or hardware devices that are unlikely to be supported by an IaaS provider.
+                                    </td>  
+                                  </tr>
+                                  <tr>
+                                        <th><font color="#db991e">The application uses End Of Life software.</font></th>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                                If the application uses unsupported or soon to be unsupported software, the migration options to IaaS may be limited and not feasible
+                                        </td>  
+                                      </tr>
+                                      <tr>
+                                            <th><font color="#db991e">The application is using and depends on Hardware Security Module (HSM).</font></th>
+                                          </tr>
+                                          <tr>
+                                            <td>
+                                                    If the application depends on Hardware Security Module, As-Is migration may not be possible.
+                                            </td>  
+                                          </tr>
+                                          <tr>
+                                                <th><font color="#db991e">The application requires more than 512 GB of RAM or more than 64 vCPUs per server</font></th>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                        Only AWS has virtual machines with compute capacities larger than half a TB (up to 2 TB of RAM and 128 vCPUs). In order to use public cloud, App will need to change its architecture to utilize smaller VMs or use PaaS/SaaS solutions.
+                                                </td>  
+                                              </tr>
+        </table>
+    </small>
+    <hr>
+    <h4>INTEGRATION - Does the application have dependencies from the list below?</h4>
+    <small>
+        <table style="width:100%">
+                <tr>
+                        <th><font color="#db991e">The intra-application components require very low network latency (sub 2 ms).</font></th>
+                      </tr>
+                      <tr>
+                        <td>
+                                If intra application components communications require super low latency (sub 2ms), cloud may not be an option for the application without rearchitecting the application / dependencies / integrations to remove latency requirements.
+                        </td>  
+                      </tr>
+                      <tr>
+                            <th><font color="#db991e">The database can't be hosted in a different location than the rest of the application.</font></th>
+                          </tr>
+                          <tr>
+                            <td>
+                                    Even though the application architecture where DB hosted on prem and rest of the app hosted in the cloud is supported, BBY Internal Architecture Standard does not recommend separating DB from rest of the Application.
+                            </td>  
+                          </tr>
+                          <tr>
+                                <th><font color="#db991e">The application uses non-enterprise standard integration software (COTS components / middleware / queues).</font></th>
+                              </tr>
+                              <tr>
+                                <td>
+                                        All BBY applications must use standard Integration Software (ex IBM MQ, rabbitmq, etc…). If the application is not using standard BBY integration software, migration to cloud may not be possible without changing the application integration software.
+                                </td> 
+                            </tr> 
+        </table>
+    </small>
+    <hr>
+    <h4>ENTERPRISE ARCHITECTURE - Does the application matches any of the below statements?</h4>
+    <small>
+        <table style="width:100%">
+                <tr>
+                        <th><font color="#db991e">The application's business logic is very complex and not documented.</font></th>
+                      </tr>
+                      <tr>
+                        <td>
+                                If the application logic is complex and not documented, migration to cloud as-is may not be possible or desired.
+                        </td>  
+                      </tr>
+                      <tr>
+                            <th><font color="#db991e">Data Replication for High Availability / Disaster Recovery (HA/DR) using cloud unsupported mechanisms (Oracle RAC / SAN Replication / etc.).</font></th>
+                          </tr>
+                          <tr>
+                            <td>
+                                    If the application's HA/DR depends on infrastructure capabilities not provided in the cloud, changes to design should be made before migrating to accommodate new hosting platform. As-Is migration may not be possible.
+                            </td>  
+                          </tr>
+                          <tr>
+                                <th><font color="#db991e">The application requires IP Multicast.</font></th>
+                              </tr>
+                              <tr>
+                                <td>
+                                        Traditional IP communication allows a host to send packets to a single host (unicast transmission) or to all hosts (broadcast transmission). IP multicast provides a third possibility: allowing a host to send packets to a subset of all hosts as a group transmission. Major Cloud Providers do not support multicast and 3rd party tools must be used. So, an as-is migration may not be possible.  Most likely multicast is not used in BBY. 
+                                </td> 
+                            </tr> 
+                            <tr>
+                                    <th><font color="#db991e">The business leadership has not provided support for modernization of the application.</font></th>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                            If the application business sponsor does not provide support/funds/time for cloud migration, then a migration is not feasible.
+                                    </td>  
+                                  </tr>
+                                  <tr>
+                                        <th><font color="#db991e">The application uses existing code (intellectual property / proprietary) that provides a competitive advantage.</font></th>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                                If the applications must keep/use existing code (i.e. because of Intellectual Property, provides competitive advantage, etc.) and the cloud provider does not support or does not make it possible to run that code, replacing with SaaS cloud option may not be available.
+                                        </td>  
+                                      </tr>
+                                      <tr>
+                                            <th><font color="#db991e">There is no comparable cloud-based SaaS alternative available in the marketplace. If unknown, leave unchecked.</font></th>
+                                          </tr>
+                                          <tr>
+                                            <td>
+                                                    Cloud migration calls for SaaS first, PaaS second, and then IaaS hosting model considerations. If a SaaS offering is not available for the service application provides, or service is not commodity-based, replacing with SaaS may not be an option.
+                                            </td> 
+                                        </tr> 
+        </table>
+    </small>
+    <br>
+    <button class="btn btn-primary" routerLink="/help">Back</button>
+    <button class="btn btn-primary" routerLink="/help3">Next</button>
+    <br>
+</div>

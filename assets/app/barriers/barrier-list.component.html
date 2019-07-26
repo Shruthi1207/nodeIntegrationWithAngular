@@ -1,0 +1,51 @@
+<!-- <button type="button" class="btn btn-primary btn-sm top-left" (click)="cancel()">
+        <span class="glyphicon glyphicon-step-backward"></span> Back
+</button> -->
+
+<div class="container">
+    <h3>Cloud Barrier Questions</h3>
+    <h5>For each of the categories below, <b>select all answers that apply</b></h5>
+    <hr>
+    <small>
+        <form [formGroup]="barrierGroup" (ngSubmit)="onSubmit()" > 
+            <h4><font color="#db991e"><b>Infrastructure</b></font> - Does the application have any of the following dependencies?</h4>
+            <div class="row" *ngFor="let barrier of infraBarriers">
+                <input [formControlName]="barrier.id" type="checkbox">
+                <label>{{barrier.text}}</label>
+                <span [tooltip]="getTooltip(barrier.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+            <hr>
+            <h4><font color="#db991e"><b>Integration</b></font> - Does the application have dependencies from the list below?</h4>
+            <div class="row" *ngFor="let barrier of integBarriers">
+                <input [formControlName]="barrier.id" type="checkbox">
+                <label>{{barrier.text}}</label>
+                <span [tooltip]="getTooltip(barrier.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+            <hr>
+            <h4><font color="#db991e"><b>Enterprise Architecture</b></font> - Does the application have unique technical requirements which can't be changed?</h4>
+            <div class="row" *ngFor="let barrier of eaBarriers">
+                <input [formControlName]="barrier.id" type="checkbox">
+                <label>{{barrier.text}}</label>
+                <span [tooltip]="getTooltip(barrier.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+            <br>
+            <!-- <button type="button" class="btn btn-info" (click)="cancel()">
+                    <span class="glyphicon glyphicon-step-backward"></span> Back
+            </button>
+            <button class="btn btn-primary" type="submit">Save Cloud Barriers</button> -->
+            <button class="btn btn-primary" (click)="assessmentHomeClick()">Assessment Home</button>
+            <button  type="button" class="btn btn-primary" (click)="infoAppDetailsClick()">1: Info About The App</button>
+            <button  type="button" class="btn btn-primary" (click)="hostingCalculatorClick()">3: Hosting Calculator</button>        
+            <button type="button" class="btn btn-success" (click)="resultsClick()">Results</button>
+            <hr>
+            <button type="button" class="btn btn-info" (click)="cancel()">
+                <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button>
+        <button class="btn btn-primary" type="submit">Save</button>
+         </form>
+        
+        <!--<br><pre>{{barrierGroup.value | json}}</pre> -->
+        
+    </small>
+ </div>
+ <br><br>

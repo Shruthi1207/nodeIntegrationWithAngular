@@ -1,0 +1,15 @@
+
+use cloudgate
+db.barriers.insert( { rank : 50, text : "My barrier question text.", hover : "This is the text that will displayed when hovering.", grouping : "ent-arch", scores : [1,1,1,1,1,1,1]} )
+
+WriteResult({ "nInserted" : 1 })
+
+
+db.customers.update(
+  {"firstname": "Max"},
+  { 
+    $set: {
+      "lastname": "Maier"
+    }
+  }
+);

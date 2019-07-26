@@ -1,0 +1,10 @@
+use cloudgate
+db.Calculations.drop()
+try {
+   db.Calculations.insertMany( [
+    
+
+   ] );
+} catch (e) {
+   print (e);
+}

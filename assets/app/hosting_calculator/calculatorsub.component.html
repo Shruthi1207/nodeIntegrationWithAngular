@@ -1,0 +1,343 @@
+<div [formGroup]="myFormm">
+    <div class="container-fluid container-scroll">
+        <div class="row">
+            <div class="col-md-1" >
+                <div class="row" title="Please enter entry description ">Description</div>
+                <div class="row"><input type="text" formControlName="server"  max="15" /></div>
+            </div>
+            <div class="col-md-1" id = "smallWidth" >
+                <div class="row" title="If you have identical server configs, then indicate the number of servers for this entry "># of <br> Servers</div>
+                <div class="row"><input type="number" formControlName="noOfServers"  min="1"  (change)="ServerSizeValueChange($event)"/></div>
+            </div>
+            <div class="col-md-1 "  >
+                <div class="row" title="Select yes only if all servers entered are nodes of the same cluster with shared storage. Do not enter nodes from different clusters even though they are similar in config. Add a new row for new clusters.">Is Clustered</div>
+                <div class="row"><select formControlName="IsClustered" class="select-box" (change)="storageDataChange($event)">        
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                  </select></div>
+            </div>
+            <div class="col-md-1" id = "smallWidth">
+                <div class="row" title="Please indicate the environment the server is deployed in. ">Env</div>
+                <div class="row"><select formControlName="environment" class="select-box">
+                      <option value="PD" selected>PD</option>
+                      <option value="PL/DR">PL/DR</option>
+                      <option value="DR">DR</option>
+                      <option value="PT">PT</option>
+                      <option value="DT">DT</option>
+                      <option value="PL">PL</option>
+                  </select></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Please select closest server size (rounding up). ">Server Size</div>
+                <div class="row"><select formControlName="size" class="select-box" (change)="ServerSizeValueChange($event)">
+                      <option value="Small (2/8)" selected>S 2x8</option>
+                      <option value="Medium (4/32)"  >M 4x32</option>
+                      <option value="Large (8/64)">L 8x64</option>
+                      <option value="X-Large (16/64)">XL 16x64</option>
+                      <option value="XXL (32/128)">XXL 32x128</option>
+                      <option value="XXXL (64/480)">XXXL 64x480</option>
+                      <option value="Jumbo (>64 and >480)">JUMBO (>64CPU and/or >512GB RAM)</option>
+                  </select></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Please select the OS. ">OS</div>
+                <div class="row"><select formControlName="os" class="select-box" (change)="ServerSizeValueChange($event)">>
+                      <option value="Windows" selected>Windows</option>
+                      <!-- <option value="Windows 2016">Windows 2016</option> -->
+                      <option value="RHEL">RHEL</option>
+                      <option value="CentOS">CentOS</option>
+                  </select></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Select yes if server/cluster is running a Database ">DB</div>
+                <div class="row"><select formControlName="usedForDb" class="select-box" (change)="UsedForDBValueChange($event)">        
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                  </select></div>
+            </div>
+           
+            <div class="col-md-1">
+                    
+                <div class="row" title="If server experiences different demand during different months – please select yes, otherwise select no ">Periodic<br> Workload?</div>
+                <div class="row"><select formControlName="periodicWorkload" class="select-box" (change)="ElasticitySavingsParametersChange($event)">        
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                  </select></div>
+            </div>
+            <div class="col-md-1" id = "smallWidth">
+                <div class="row" title="Base % represents the server utilization during “Quiet” months. ">Base %</div>
+                <div class="row"><input type="number" formControlName="base" max="100" min="0" (change)="ElasticitySavingsParametersChange($event)"></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="How many months per year do the servers/clusters experience high workload">Months of<br> High Util
+                    </div>
+                <div class="row"><input type="number" formControlName="monthsOfHighUsage" max="12" min="1" (change)="ElasticitySavingsParametersChange($event)"></div>
+            </div>            
+            <div class="col-md-1">
+                <div class="row" title="Enter Capacity (in GB) of Allocated Storage for SAN tier. 
+                For clusters sharing same storage enter each node individually, but enter storage for only one server. Rest nodes in the cluster should indicate storage as 0.
+                If per server usage of storage is unknown – enter entire consumed storage for one server only and rest servers indicate 0. Results of Calculations will not change ">SAN Storage<br> (GB)</div>
+                <div class="row"><input type="number" formControlName="sanSSD"  (change)="storageDataChange($event)" /></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Enter Capacity (in GB) of Allocated Storage  from the tier. 
+                For clusters sharing same storage enter each node individually, but enter storage for only one server. Rest nodes in the cluster should indicate storage as 0.
+                If per server usage of storage is unknown – enter entire consumed storage for one server only and rest servers indicate 0. Results of Calculations will not change ">File Storage<br> (GB)</div>
+                <div class="row"><input type="number" formControlName="FileNAS" (change)="storageDataChange($event)" /></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Enter Capacity (in GB) of Allocated Storage  from the tier. 
+                For clusters sharing same storage enter each node individually, but enter storage for only one server. Rest nodes in the cluster should indicate storage as 0.
+                If per server usage of storage is unknown – enter entire consumed storage for one server only and rest servers indicate 0. Results of Calculations will not change ">Object Storage<br> (GB)</div>
+                <div class="row"><input type="number" formControlName="Object"  (change)="storageDataChange($event)" /></div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" title="Enter % how much of data is changing per day. Default is 1%, and it will be used to calculate incremental backup size. ">Change <br> Rate (%/day)</div>
+                <div class="row"><input type="number" formControlName="dailyDataChangeRate" (change)="storageDataChange($event)"
+                    /></div>
+            </div>
+            <div hidden>
+            <div class="col-md-1" >
+                <div class="row" title="Retention(days)">Retention(days)</div>
+                <div class="row"><input type="number" formControlName="RetentionDays" (change)="storageDataChange($event)" /></div>
+            </div>
+        </div>
+            <div class="col-md-1">
+                <div class="row" title="how much data will be transferred outbound from the server over a 1 month period. Please estimate, if unknown, then select Medium Tier (1-5 TB) ">Out transfer<br> TB/mnth</div>
+                <div class="row"><select formControlName="ExpectedOutboundTransfer" class="select-box" >
+                      <option value=1 selected>Small (< 1 TB)</option>
+                      <option value=2>Medium (1 - 5 TB)</option>
+                      <option value=3>Large (5 - 10 TB)</option>
+                      <option value=4>Extra Large (10 - 20 TB)</option>
+                  </select></div>
+            </div>
+            <div hidden>
+            <div class="col-md-1" >
+                <div class="row" title="Please Enter Server Name"> Backup Size (GB)</div>
+                <div class="row"><input type="number" formControlName="backupSize"   readonly/></div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <br>
+
+
+    <br>
+    <div hidden>
+        <div class="row">
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Backup Size: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" formControlName="backupSize" readonly/>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>BBY Monthly Cost Compute: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" formControlName="BBYMonthlyCostCompute" readonly/>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>BBY Monthly Cost Storage: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" formControlName="BBYMonthlyCostStorage" readonly/>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>TOTAL per Server: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" formControlName="TotalPerServer" readonly/>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="background: #e0e0e0;">
+
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Azure Compute: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AzureCompute"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Azure Storage: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AzureStorage"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Azure Network: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AzureNetwork"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Azure TOTAL per Server: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AzureTotalPerServer" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="background: #e0e0e0;">
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>AWS Compute: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AWSCompute"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>AWS Storage: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AWSStorage"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>AWS Network: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AWSNetwork"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>AWS TOTAL per Server: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AWSTotalPerServer" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="background: #e0e0e0;">
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>GCP Compute: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="GCPCompute"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>GCP Storage: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="GCPStorage"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>GCP Network: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="GCPNetwork"  />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>GCP TOTAL per Server: </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="GCPTotalPerServer" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="background: #e0e0e0;">
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>%savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="SavingsPerMonth" />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>Azure savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AzureSavingsPerMonth" />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>AWS savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="AWSSavingsPerMonth" />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>GCP savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="GCPSavingsPerMonth" />
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="row" style="background: #e0e0e0;">
+
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>%PaSS savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="PaSSSavingsPerMonth" />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>PaSS Azure savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="PaSSAzureSavingsPerMonth" />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>PaSS AWS savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="PaSSAWSSavingsPerMonth" />
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-3">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <small><b>PaSS GCP savings/mnth : </b></small>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <input type="number" readonly formControlName="PaSSGCPSavingsPerMonth" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

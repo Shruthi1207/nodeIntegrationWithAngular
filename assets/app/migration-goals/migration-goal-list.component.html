@@ -1,0 +1,76 @@
+<!-- <button type="button" class="btn btn-primary btn-sm top-left" (click)="cancel()">
+        <span class="glyphicon glyphicon-step-backward"></span> Back
+</button> -->
+
+<div class="container">
+    <h3>Cloud Benefit Questions</h3>
+    <h5>Cloud can support your plans to improve/modernize applications. Do you currently have plans/goals matching any of the points below? </h5>
+
+    <font color="red" size=".8em"><b>0 = No (we don't need it or is not relevant)</b></font><br><font color="#f4bc42" size=".8em"><b>3 = We are thinking about it</b></font><br><font color="green"><b>5 = Yes</b></font>
+    <hr>
+    <small>
+        <form [formGroup]="migrationGoalGroup" (ngSubmit)="onSubmit()" >
+            <h4>Following set of statements will analyze if application can be replaced by SaaS offerings</h4>
+            <div class="row" *ngFor="let migrationGoal of saasMigrationGoals">
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="0">0
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="3">3
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="5">5
+                </label>
+                <span class="goal-label"><label>{{migrationGoal.text}}</label></span>
+                <span [tooltip]="getTooltip(migrationGoal.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+            <hr>
+            <h4>Following set of statements will analyze if application can be replaced by PaaS or IaaS offerings</h4>
+            <div class="row" *ngFor="let migrationGoal of ipaasMigrationGoals">
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="0">0
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="3">3
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="5">5
+                </label>
+                <span class="goal-label"><label>{{migrationGoal.text}}</label></span>
+                <span [tooltip]="getTooltip(migrationGoal.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+            <hr>
+            <h4>Business stakeholders demanding one of the below:</h4>
+            <div class="row" *ngFor="let migrationGoal of businessMigrationGoals">
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="0">0
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="3">3
+                </label>
+                <label class="radio-inline">
+                    <input [formControlName]="migrationGoal.id" type="radio" value="5">5
+                </label>
+                <span class="goal-label"><label>{{migrationGoal.text}}</label></span>
+                <span [tooltip]="getTooltip(migrationGoal.id)" tooltipPlacement="top" class="glyphicon glyphicon-info-sign"></span>
+            </div>
+          
+            <br>
+            <!-- <button type="button" class="btn btn-info" (click)="cancel()">
+                    <span class="glyphicon glyphicon-step-backward"></span> Back
+            </button> -->
+            <!-- <button class="btn btn-primary" type="submit">Save Cloud Benefits</button> -->
+            <button type="button" class="btn btn-primary" (click)="assessmentHomeClick()">Assessment Home</button>
+            <button  type="button" class="btn btn-primary" (click)="infoAppDetailsClick()">1: Info About The App</button>
+            <button  type="button" class="btn btn-primary" (click)="hostingCalculatorClick()">3: Hosting Calculator</button>        
+            <button type="button" class="btn btn-success" (click)="resultsClick()">Results</button>
+            <hr>
+            <button type="button" class="btn btn-info" (click)="cancel()">
+                <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button>
+        <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+     <!--   <br><pre>{{migrationGoalGroup.value | json}}</pre> -->
+    </small>
+ </div>
+ <br><br>

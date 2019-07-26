@@ -1,0 +1,145 @@
+table.matrix  {
+    padding: 8px;
+    margin-right: 16px;
+    padding-right: 16px;
+    border-spacing: 1px;
+    border-collapse: separate;
+    width: 100%;
+}
+
+td.r-cell-0, th.r-cell-0 {
+    border: none; 
+    padding-right: 5px; 
+    margin-right: 5px;
+    column-width: 240px;
+   /* white-space: nowrap; */
+   
+}
+.resultTable table, .resultTable th,.resultTable td {
+    border: 1px solid black;   
+}
+.resultTable th, .resultTable td {
+    padding: 12px !important;
+}
+.resultTable{
+    margin-top: 15px;
+    
+}
+.calculationHeading{
+    display: inline;
+    margin-left: 2px;
+}
+   
+.table.mytable>thead>tr>th{vertical-align:bottom}
+    
+
+
+td.final-cell {
+  /* border-width: 1px; 
+    border-color: #2E2C2C;
+    */ 
+    padding-right: 5px; 
+    margin-right: 5px;
+    font-weight: bold;
+    text-align: center;
+    border-spacing: 2px;
+    column-width: 140px;
+    padding-right: 5px; 
+    margin-right: 5px;
+    height: 50px;
+
+}
+
+td.best-match {
+    background-color: lightgreen;
+}
+
+td.no-option {
+    background-color: red;
+}
+
+td.viable {
+    background-color: yellow;
+}
+
+td.not-optimal {
+    background-color: lightgrey;
+}
+
+td.link-row {
+    border: none; 
+}
+
+td.r-cell-1, th.r-cell-1 {
+    column-width: 140px !important;
+    text-align: center !important;
+}
+
+th.r-cell-1 {
+   /* vertical-align:bottom !important;*/
+}
+
+td.right {
+    padding-left: 12px !important;
+}
+
+td.score {
+    column-width: 140px;
+    text-align: center;
+    line-height: 2;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+
+td.score1 {
+    padding-top:8px;
+    column-width: 140px;
+    text-align: center;
+    line-height: 2;
+    vertical-align: middle;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+tr.final {
+    background-color: #E5CC90;
+}
+
+
+h5.header {
+  /*  color:#252627;*/
+    color: #db991e;
+    font-weight: bold;
+}
+
+a.nav {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: lightslategray;
+    color: lightslategray;
+    font-size: smaller;
+    
+}
+
+a.nav:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #2A4A69;
+    color: #2A4A69;
+    font-size: smaller;
+    
+}
+
+
+div.myrow {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}

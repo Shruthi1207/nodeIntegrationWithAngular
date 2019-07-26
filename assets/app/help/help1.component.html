@@ -1,0 +1,430 @@
+<div class="container">
+    <h3>Section 1 - Application Architecture & Security Details</h3><br>
+    <h4>Application Architecture</h4>
+    <small>
+        <table style="width:100%">
+            <tr>
+              <th><font color="#db991e">Is the application architecture based on cloud guiding principles and can be considered modernized?</font></th>
+            </tr>
+            <tr>
+              <td>
+                    <b>Traditional on-premises</b>: Monolithic, centralized, design for predictable scalability, relational database, strong consistency, serial and synchronized processing, design to avoid failures (MTBF), occasional big updates, manual management, snowflake servers.<br><br>
+                    <b>Modern cloud</b>: Decomposed, de-centralized, design for elastic scale, polyglot persistence (mix of storage technologies), eventual consistency, parallel and asynchronous processing, design for failure (MTTR), frequent small updates, automated self-management, immutable infrastructure.
+              </td>  
+            </tr>
+            <tr>
+              <th><font color="#db991e">Does the application support auto scaling?</font></th>
+            </tr>
+            <tr>
+                <td>Auto Scaling helps maintain application availability and allows compute capacity to be dynamically scaled up or down automatically according to defined conditions.</td>
+            </tr>
+            <tr>
+                    <th><font color="#db991e">Does the application use containers?</font></th>
+                  </tr>
+                  <tr>
+                      <td>Containerization -- also called container-based virtualization and application containerization -- is an OS-level virtualization method for deploying and running distributed applications without launching an entire VM for each application.</td>
+                  </tr>
+                  <tr>
+                        <th><font color="#db991e">Does the application use microservices?</font></th>
+                      </tr>
+                      <tr>
+                          <td>Microservices is an approach to application development in which a large application is built as a suite of modular services. Each module supports a specific business goal and uses a simple, well-defined interface to communicate with other sets of services.</td>
+                      </tr>
+                      <tr>
+                            <th><font color="#db991e">Is the application stateless?</font></th>
+                          </tr>
+                          <tr>
+                              <td>A stateless application is an application program that does not save client data generated in one session for use in the next session with that client. Each session is carried out as if it were the first time and responses are not dependent upon data from a previous session.</td>
+                          </tr>
+                          <tr>
+                                <th><font color="#db991e">Does the application use real time analytics?</font></th>
+                              </tr>
+                              <tr>
+                                  <td>Real-time analytics refers to analytics that are able to be accessed as they come into a system. In general, the "analytics" are used to define data patterns that provide meaning to a business or other entity, where analysts collect valuable information by sorting through and analyzing that data.</td>
+                              </tr>
+                              <tr>
+                                    <th><font color="#db991e">Does the application follow a traditional 2-tier or 3-tier application architecture?</font></th>
+                                  </tr>
+                                  <tr>
+                                      <td>In software engineering, multitier architecture (often referred to as n-tier architecture) or multilayered architecture is a client–server architecture in which presentation.</td>
+                                  </tr>
+          </table>
+    </small>
+    <hr>
+    <h4>What is the application workload?</h4>
+    <small>
+            <table style="width:100%">
+                <tr>
+                    <th><font color="#db991e">Static</font></th>
+                </tr>
+                <tr>
+                    <td>The application compute utilization is more or less flat over time.</td>
+                </tr>
+                <tr>
+                        <th><font color="#db991e">Periodic</font></th>
+                    </tr>
+                    <tr>
+                        <td>The application compute utilization peaks periodically.</td>
+                    </tr>
+                    <tr>
+                            <th><font color="#db991e">Unpredictable</font></th>
+                        </tr>
+                        <tr>
+                            <td>The applications compute utilization over time is difficult to predict (random / unforeseeable).</td>
+                        </tr>
+                        <tr>
+                                <th><font color="#db991e">On and Off</font></th>
+                            </tr>
+                            <tr>
+                                <td>The application is only turned on for a predetermined amount of time and turned off not needed.</td>
+                            </tr>
+                            <tr>
+                                    <th><font color="#db991e">Growing Fast</font></th>
+                                </tr>
+                                <tr>
+                                    <td>The application's utilization is increasing very quickly.</td>
+                                </tr>
+                                <tr>
+                                        <th><font color="#db991e">Mixed</font></th>
+                                    </tr>
+                                    <tr>
+                                        <td>The application's utilization cannot be described by one of the above.</td>
+                                    </tr>
+                                </table>
+                            </small>
+                            <hr>
+                            <h4>Network Services</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Does the application use a WAF, Load Balancing, or Layer 7? If so, which ones?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>WAF: Web Application Firewall. Inspects and blocks HTTP traffic to/from a web app. Load Balancing: Distributes app's workloads across multiple resources (F5, etc.) Layer 7: Application specific network services (NFS, SNMP, Telnet, HTTP, FTP, etc.)</td>
+                                        </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>PCI Compliance</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Is the application required to follow PCI compliance?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>The Payment Card Industry Data Security Standard (PCI DSS) is a set of security standards designed to ensure that ALL companies that accept, process, store or transmit credit card information maintain a secure environment.</td>
+                                        </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Integration</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Is the application a system of record for other applications?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>A system of record (SOR) or source system of record (SSoR) is a data management term for an information storage system (commonly implemented on a computer system running a database management system) that is the authoritative data source for a given data element or piece of information.</td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Batch / File-based (< 60 min latency requirement)</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>Batch Integration. The batch integration framework uses scheduled tasks to transfer data and maintain data consistency between systems.</td>
+                                            </tr>
+                                            <tr>
+                                                    <th><font color="#db991e">Queue (< 60 sec latency requirement)</font></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Queue Integration allows independent and potentially non-concurrent applications on a distributed system to securely communicate with each other.</td>
+                                                </tr>
+                                                <tr>
+                                                        <th><font color="#db991e">API (Real time / < 10 ms latency requirement)</font></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Application program interface (API) is a set of routines, protocols, and tools for building software applications. An API specifies how software components should interact.</td>
+                                                    </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>What is the application's SLA?</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">What is the required availability for the application (i.e. 99.99%)?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Application availability is the extent to which an application is operational, functional and usable for completing or fulfilling a user's or business's requirements.</td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">What is storage performance of the data tier (IOPS)?</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>IOPS means IO operations per second, or amount of read or write operations that could be done in one seconds time. A certain amount of IO operations will also give a certain throughput of megabytes each second, so these two are related. A third factor is however involved: the size of each IO request. Depending on the operating system and the application/service that needs disk access it will issue a request to read or write a certain amount of data at the same time. This is called the IO size and could be for example 4 KB, 8 KB, 32 KB and so on.</td>
+                                            </tr>
+                                            <tr>
+                                                    <th><font color="#db991e">What is the expected response time (Immediate / 1 hour / 1 day / etc.) for this application?</font></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Application Response Time is a key aspect of Application Performance Monitoring and is defined as the time it takes an application to respond to user requests – measured from the user's point of view.</td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>What are the application's Business Continuity / Disaster Recovery (BC/DR) needs?</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Recovery Point Objective (RPO)</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>RPO dictates the allowable data loss -- how much data can I afford to lose?</td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Recovery Time Objective (RTO)</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>The RTO is how long you can basically go without a application. This is often associated with your maximum allowable or maximum tolerable outage.</td>
+                                            </tr>
+                                            <tr>
+                                                    <th><font color="#db991e">Disaster Recovery (DR) Tier</font></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Best Buy Identified number of Tiers for its applications. If application you are assessing assigned to DR Tier -please specify it here.</td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>What are the application's Backup needs?</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">What is the retention period for the data in the backup?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>Retention period is the amount of time in which a given set of data will remain available for restore. Some backup products rely on daily copies of data and measure retention in terms of days. Others retain a number of copies of data changes regardless of the amount of time.</td>
+                                        </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>What are the application's dependencies?</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Is the application using Hardware Security Module (HSM)?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>A hardware security module (HSM) is a physical computing device that safeguards and manages digital keys for strong authentication and provides crypto processing. These modules traditionally come in the form of a plug-in card or an external device that attaches directly to a computer or network server.</td>
+                                        </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Governance</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Please identify what type of data the application is using / processing / storing?(Public,Internal,Restricted,Sensitive)</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                    <b>Public</b>: Information that Best Buy intends to be released and/or used by the public.<br><br>
+                                                    
+                                                    <b>Internal</b>: Information where unauthorized acquisition, access, use, or disclosure could be disruptive or embarrassing, but is not reasonably expected to cause significant harm to the company or an individual.<br><br>
+                                                    
+                                                    <b>Restricted</b>: Information where unauthorized acquisition, access, use, or disclosure could cause material or serious adverse effect or harm to the company or individuals (including but not limited to negative publicity, breach of contracts, financial or other loss to the business, damage to reputation, legal claims, and/or criminal or civil fines and penalties).<br><br>
+                                                    
+                                                    <b>Sensitive</b>: Information where unauthorized acquisition, access, use, or disclosure could (i) require the company to make disclosures or notifications including to regulators, customers, and/or law enforcement, and/or (ii) cause material or serious adverse effect, harm, or loss to the company or individuals, including identity theft and/or account fraud.
+                                                    
+                                            </td>
+                                        </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Compliance: make sure that migration to cloud will not violate any laws and regulations.</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Laws and Regulations: The Best Buy data center is compliant with public laws and regulations. Will the application stay compliant with those laws if it is migrated to the cloud?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                if you don’t know -check with Legal, Security, or Data Governance departments.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Has legal provided approval to move this application and its data to the cloud / external hosting?</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    if you don’t know -check with Legal, Security, or Data Governance departments.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                    <th><font color="#db991e">Data Location: Today, the location of data and the flow of transactions is known. Will the application stay compliant with laws related to moving data across borders if needed?</font></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        if you don’t know -check with Legal, Security, or Data Governance departments.
+                                                    </td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Compliance Checkpoint</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Is the application subject to HIPAA compliance?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                HIPAA (Health Insurance Portability and Accountability Act of 1996) is United States legislation that provides data privacy and security provisions for safeguarding medical information. If you don’t know, please check with Legal, Security, or Data Governance departments.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Is the application subject to SOX compliance?</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    The Sarbanes-Oxley Act (SOX) requires all publicly held companies to establish internal controls and procedures for financial reporting to reduce the possibility of corporate fraud. If you don’t know, please check with Legal, Security, or Data Governance Departments.
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <th><font color="#db991e">Is the application subject to CPNI compliance?</font></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    In the United States, CPNI (Customer Proprietary Network Information) is information that telecommunications services such as local, long distance, and wireless telephone companies acquire about their subscribers. It includes not only what services they use but their amount and type of usage. if you don’t know, check with Legal, Security, or Data Governance Departments.
+                                                </td>
+                                            </tr> -->
+                                            <tr>
+                                                        <th><font color="#db991e">If the application is subject to any other regulatory compliance, list them here.</font></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            If you don’t know, please check with Legal, Security, or Data Governance departments.
+                                                        </td>
+                                                    </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Trust</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Internal Access: Will migration to the cloud change how the application or its components / services are accessed internally? Will migration create more, uncontrolled access points?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                If you don’t know, please check with Security team
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Visibility: Unlike in the traditional data center, the cloud security model assumes shared responsibility (based on the type of service consumed). Will there be a sufficient level of access and visibility to information needed for the application?</font></th>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        If you don’t know, pleae check with Security team
+                                                    </td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Unknown Risks</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Will the Level 2 (L2) Operations team be able to support the application once migrated? Will the Level 2 (L2) Operations team be able to support the application once migrated?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                A standard operating procedure, or SOP, is a set of step-by-step instructions compiled by an organization to help workers carry out routine operations. "standard troubleshooting procedures", or STP is set of instructions to help identify, isolate, and address known issues.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Has a Cloud Exit Strategy been established for the application?</font></th>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        Migration to cloud can cause lock in for app and its data into CSP's cloud ecosystem. If required, do you know how application and its data can be migrated to different platform.
+                                                    </td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Identity and Access Management</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Authentication: specify which authentication mechanism is used today (AD, ODS, LDAP, etc.)</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Authentication is an absolutely essential element of a typical security model. It is the process of confirming the identification of a user (or in some cases, a machine) that is trying to log on or access resources. There are a number of different authentication mechanisms, but all serve this same purpose. 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Access Control: Does the application use Role Based Access Control (RBAC)?</font></th>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within an enterprise. In this context, access is the ability of an individual user to perform a specific task, such as view, create, or modify a file.
+                                                    </td>
+                                                </tr>
+                            </table>
+                            </small>
+                            <hr>
+                            <h4>Availability</h4>
+                            <small>
+                            <table style="width:100%">
+                                    <tr>
+                                            <th><font color="#db991e">Does the application require High Availability (HA)?</font></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                High availability combines software with industry-standard hardware to minimize downtime by quickly restoring essential services when a system, component, or application fail.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th><font color="#db991e">Is there a contingency plan for the application in case the cloud is not available (for whatever reason)?</font></th>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        plan designed to take a possible future event or circumstance into account. Will the application require a different Business Continuity / Disaster Recovery plan once it is on the cloud?
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                        <th><font color="#db991e">Will the existing BC/DR infrastructure design change with the migration to the cloud?</font></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Existing BC/DR plan may depend on infrastructure components/mechanisms not available in a cloud. Do you know how BC/DR plan will look like after migration?
+                                                        </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <th><font color="#db991e">Since cloud is all service based, the most common attack is DOS / DDOS. Is there a plan in place on how to deal with DOS / DDOS attacks?</font></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            A denial-of-service attack (DoS attack) is a cyber-attack where the perpetrator seeks to make a machine or network resource unavailable to its intended users by flooding network traffic to a system.
+                                                        </td>
+                                                    </tr>
+                            </table>
+                            </small>
+                            <br>
+                            <button class="btn btn-primary" routerLink="/help2">Next</button>
+                            <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Next</button>
+                            <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        Header
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Body
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div> -->
+                            <br>
+</div>

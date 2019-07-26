@@ -1,0 +1,23 @@
+use cloudgate
+db.storagecloudprices.drop()
+try {
+   db.storagecloudprices.insertMany( [
+{ storagetype:"azure",tierindex:2,tier:"Managed Disk-STD-LRS",cost:"0.05"},
+{ storagetype:"azure",tierindex:1,tier:"Managed Disk-PREM-LRS",cost:"0.13"},
+{ storagetype:"azure",tierindex:3,tier:"File",cost:"0.10"},
+{ storagetype:"azure",tierindex:4,tier:"Block Blob Hot",cost:"0.04"},
+{ storagetype:"azure",tierindex:5,tier:"Block Blob Cool",cost:"0.02"},
+{ storagetype:"aws",tierindex:2,tier:"EBS HDD",cost:"0.067"},
+{ storagetype:"aws",tierindex:1,tier:"EBS SSD (General Purpose SSD)",cost:"0.135"},
+{ storagetype:"aws",tierindex:3,tier:"Amazon Elastic File System",cost:"0.30"},
+{ storagetype:"aws",tierindex:4,tier:"S3-Standard",cost:"0.023"},
+{ storagetype:"aws",tierindex:5,tier:"S3 Standard - Infrequent Access",cost:"0.0125"},
+{ storagetype:"gcp",tierindex:2,tier:"Standard persistent disks",cost:"0.04"},
+{ storagetype:"gcp",tierindex:1,tier:"SSD persistent disks",cost:"0.17"},
+{ storagetype:"gcp",tierindex:3,tier:"Regional Storage",cost:"0.02"},
+{ storagetype:"gcp",tierindex:4,tier:"Regional Storage",cost:"0.02"},
+{ storagetype:"gcp",tierindex:5,tier:"Nearline Storage",cost:"0.01"},
+   ] );
+} catch (e) {
+   print (e);
+}

@@ -1,0 +1,11 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 12px !important;
+}
+
+/* th {
+    background-color: lightgrey !important;
+} */

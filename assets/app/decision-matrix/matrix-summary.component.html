@@ -1,0 +1,97 @@
+
+
+
+<div *ngIf="isDone==true" class="container">
+    <div *ngIf="message" class="row">
+        <div class="col-md-8">
+            <br>
+                <div class="alert alert-success"><p [innerHTML]="message"> </p></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="table-responsive">
+               <h3>Decision Matrix Summary</h3>
+               <br>
+                <table id="mytable" class="table matrix-table">
+                    <thead>
+                            <th colspan=2>Cloud Benefits Selected</th>
+                    </thead>
+                    <tbody *ngIf="isSelectedMigrationGoals()">
+                        <tr *ngFor="let goal of selectedMigrationGoals"> 
+                            <span class="input-group-addon checkmark" >
+                                <i class="glyphicon glyphicon-ok icon-ok"></i>
+                            </span><td>{{goal}}</td>
+                        </tr>
+                        
+                    </tbody>
+                    <tbody *ngIf="!isSelectedMigrationGoals()">
+                            
+                        <tr > 
+                                <td class="none">There are currently no Cloud Benefits selected for this Assessment</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table id="mytable" class="table matrix-table">
+                    <thead>
+                        <th colspan=2>Cloud Barriers Selected</th>
+                    </thead>
+                    <tbody *ngIf="isSelectedCloudBarriers()">
+                        <tr *ngFor="let barrier of selectedCloudBarriers"> 
+                            <span class="input-group-addon checkmark" >
+                                <i class="glyphicon glyphicon-ok icon-barrier"></i>
+                            </span><td>{{barrier}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!isSelectedCloudBarriers()">
+                        <tr>
+                                <td class="none">There are currently no Cloud Barriers selected for this Assessment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row">
+        <!-- <button type="button" class="btn btn-info" (click)="cancel()">
+            <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button> -->
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="migrationGoalClick()">2a: Cloud Benefits</button>
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="barrierClick()">2b: Cloud Barriers</button>
+        <hr>
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="assessmentHomeClick()">Assessment Home</button>  
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="infoAppDetailsClick()">1: Info About The App</button>
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="hostingCalculatorClick()">3: Hosting Calculator</button>        
+        <button *ngIf="isAdmin() || isLocked()" type="button" class="btn btn-success" (click)="resultsClick()">Results</button>
+        <hr>
+        <button type="button" class="btn btn-info" (click)="cancel()">
+            <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button>
+        <button *ngIf="isAdmin() || !isLocked()" type="button" class="btn btn-primary" (click)="modal.show()">Save</button>
+
+        <app-modal #modal>
+            <div class="app-modal-header">
+                    <img style="width:30px; height:30px; vertical-align: middle;" src="/images/warning.png" />
+                    &nbsp;<b>Please read the below before proceeding...</b>
+            </div>
+            <div class="app-modal-body">
+                Submitting your Matrix selections will allow you to see the [Decision Matrix Results] 
+                for your assessment. However, you will no longer be able to edit your Cloud Barrier or Cloud Benefit selections.
+            </div>
+            <div class="app-modal-footer">
+                <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="submitMatrixSelections(modal)">Save</button>
+            </div>
+        </app-modal>
+        
+    </div>
+</div>
+<br><br>

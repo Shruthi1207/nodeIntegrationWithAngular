@@ -1,0 +1,44 @@
+<h3>Hosting Calculator</h3>
+<br>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- <label>Appears Once:</label>
+    <input type="text" formControlName="appearsOnce" /> -->
+  
+    <div formArrayName="formArray">
+        <div *ngFor="let control of myForm.controls['formArray'].controls; let i = index">
+            
+            <button type="button" (click)="delInput(i)" class="delbtn btn btn-danger"><b>Delete</b></button>
+            
+            <my-form-sub-component [myFormm]="myForm.controls.formArray.controls[i]"></my-form-sub-component>
+        </div>
+        <hr class="wide">
+    </div>
+
+
+    <div class="row" style="margin-left: 10px;">
+        <button type="button"  class="calcebtn btn btn-primary" (click)="addInput()"><b>Add</b></button>
+        
+    </div>
+    <hr>
+    <div class="row" style="margin-left: 10px;">
+        <!-- <button type="button" class="btn btn-info" (click)="cancel()">
+                <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button> -->
+        <button type="button" class="btn btn-primary" (click) = "assessmentHomeClick();">Assessment Home</button>
+        <button type="button" class="subbtn btn btn-primary" (click) = "infoAppDetailsClick();">1: Info About The App</button>
+        <button type="button"  class="subbtn btn btn-primary" (click) = "matrixSummaryClick();">2: Decision Matrix</button>
+        <button type="button" class="subbtn btn btn-success" (click)="resultsClick()">Results</button>
+        <!-- <button type="submit"  class="subbtn btn btn-success"><b>Submit</b></button>         -->
+    </div>
+    <hr>
+    <div class="buttons">
+        <button type="button" class="subbtn btn btn-info" (click)="cancel()">
+            <span class="glyphicon glyphicon-step-backward"></span> Back
+    </button> 
+    <button type="submit"  class="subbtn btn btn-primary"><b>Save</b></button>
+    </div>
+   
+    
+    <br>
+   
+  </form>

@@ -1,0 +1,432 @@
+<div class="container">
+    <div class="alert alert-success" *ngIf="refresh && !loading">
+        <strong>AWS pricing Details refreshed successfully!!</strong>
+    </div>
+    <br>
+    <div class="alert alert-success" *ngIf="refreshGcp && !loadingGcp">
+        <strong>GCP pricing Details refreshed successfully!!</strong>
+    </div>
+    <br>
+    <div class="alert alert-success" *ngIf="refreshAzure && !loadingAzure">
+        <strong>Azure pricing Details refreshed successfully!!</strong>
+    </div>
+    <br>
+    <h3>COMPUTE</h3>
+    <table>
+        <tr>
+            <th>BBY</th>
+            <th>Azure &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button *ngIf="loadingAzure" class="buttonload">
+                    <i class="fa fa-spinner fa-spin"></i> Loading
+                </button>
+                <button *ngIf="!loadingAzure" type="button" class="buttonload" (click)="AutoRefreshAzure()">Refresh</button>
+            </th>
+            <th>AWS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button *ngIf="loading" class="buttonload">
+                    <i class="fa fa-spinner fa-spin"></i> Loading
+                </button>
+                <button *ngIf="!loading" type="button" class="buttonload" (click)="AutoRefresh()">Refresh</button>
+            </th>
+            <th>GCP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button *ngIf="loadingGcp" class="buttonload">
+                    <i class="fa fa-spinner fa-spin"></i> Loading
+                </button>
+                <button *ngIf="!loadingGcp" type="button" class="buttonload" (click)="AutoRefreshGcp()">Refresh</button>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <th>Size</th>
+                        <th>CentOS ($/hr)</th>
+                        <th>RHEL ($/hr)</th>
+                        <th>Windows ($/hr)</th>
+                    </tr>
+                    <tr>
+                        <th>Small (2/8)</th>
+                        <td>{{bbyCS}}</td>
+                        <td>{{bbyRS}}</td>
+                        <td>{{bbyWS}}</td>
+                    </tr>
+                    <tr>
+                        <th>Medium (4/32)</th>
+                        <td>{{bbyCM}}</td>
+                        <td>{{bbyRM}}</td>
+                        <td>{{bbyWM}}</td>
+                    </tr>
+                    <tr>
+                        <th>Large (8/64)</th>
+                        <td>{{bbyCL}}</td>
+                        <td>{{bbyRL}}</td>
+                        <td>{{bbyWL}}</td>
+                    </tr>
+                    <tr>
+                        <th>X-Large (16/64)</th>
+                        <td>{{bbyCXL}}</td>
+                        <td>{{bbyRXL}}</td>
+                        <td>{{bbyWXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>XXL (32/128)</th>
+                        <td>{{bbyCXXL}}</td>
+                        <td>{{bbyRXXL}}</td>
+                        <td>{{bbyWXXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>XXXL (64/480)</th>
+                        <td>{{bbyCXXXL}}</td>
+                        <td>{{bbyRXXXL}}</td>
+                        <td>{{bbyWXXXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>Jumbo</th>
+                        <td>{{bbyCJumbo}}</td>
+                        <td>{{bbyRJumbo}}</td>
+                        <td>{{bbyWJumbo}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <th>Size</th>
+                        <th>CentOS ($/hr)</th>
+                        <th>RHEL ($/hr)</th>
+                        <th>Windows ($/hr)</th>
+                    </tr>
+                    <tr>
+                        <th>D11 v2 (2/14)</th>
+                        <td>{{azureCS}}</td>
+                        <td>{{azureRS}}</td>
+                        <td>{{azureWS}}</td>
+                    </tr>
+                    <tr>
+                        <th>D12 v2 (4/28)</th>
+                        <td>{{azureCM}}</td>
+                        <td>{{azureRM}}</td>
+                        <td>{{azureWM}}</td>
+                    </tr>
+                    <tr>
+                        <th>D13 v2 (8/56)</th>
+                        <td>{{azureCL}}</td>
+                        <td>{{azureRL}}</td>
+                        <td>{{azureWL}}</td>
+                    </tr>
+                    <tr>
+                        <th>F16 (16/64)</th>
+                        <td>{{azureCXL}}</td>
+                        <td>{{azureRXL}}</td>
+                        <td>{{azureWXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>D32 v3 (32/128)</th>
+                        <td>{{azureCXXL}}</td>
+                        <td>{{azureRXXL}}</td>
+                        <td>{{azureWXXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>E64 v3 (64/432)</th>
+                        <td>{{azureCXXXL}}</td>
+                        <td>{{azureRXXXL}}</td>
+                        <td>{{azureWXXXL}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Jumbo</th>
+                        <td>{{bbyCJumbo}}</td>
+                        <td>{{bbyRJumbo}}</td>
+                        <td>{{bbyWJumbo}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <th>Size</th>
+                        <th>CentOS ($/hr)</th>
+                        <th>RHEL ($/hr)</th>
+                        <th>Windows ($/hr)</th>
+                    </tr>
+                    <tr>
+                        <th>m4.large (2/8)</th>
+                        <td>{{awsCS}}</td>
+                        <td>{{awsRS}}</td>
+                        <td>{{awsWS}}</td>
+                    </tr>
+                    <tr>
+                        <th>r4.xlarge (4/30.5)</th>
+                        <td>{{awsCM}}</td>
+                        <td>{{awsRM}}</td>
+                        <td>{{awsWM}}</td>
+                    </tr>
+                    <tr>
+                        <th>r4.2xlarge (8/61)</th>
+                        <td>{{awsCL}}</td>
+                        <td>{{awsRL}}</td>
+                        <td>{{awsWL}}</td>
+                    </tr>
+                    <tr>
+                        <th>m4.4xlarge (16/64)</th>
+                        <td>{{awsCXL}}</td>
+                        <td>{{awsRXL}}</td>
+                        <td>{{awsWXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>r3.8xlarge (32/244)</th>
+                        <td>{{awsCXXL}}</td>
+                        <td>{{awsRXXL}}</td>
+                        <td>{{awsWXXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>i3.16xlarge (64/488)</th>
+                        <td>{{awsCXXXL}}</td>
+                        <td>{{awsRXXXL}}</td>
+                        <td>{{awsWXXXL}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Jumbo</th>
+                        <td>{{bbyCJumbo}}</td>
+                        <td>{{bbyRJumbo}}</td>
+                        <td>{{bbyWJumbo}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <th>Size</th>
+                        <th>CentOS ($/hr)</th>
+                        <th>RHEL ($/hr)</th>
+                        <th>Windows ($/hr)</th>
+                    </tr>
+                    <tr>
+                        <th>n1-standard-2 (2/7.5)</th>
+                        <td>{{gcpCS}}</td>
+                        <td>{{gcpRS}}</td>
+                        <td>{{gcpWS}}</td>
+                    </tr>
+                    <tr>
+                        <th>n1-highmem-4 (4/26)</th>
+                        <td>{{gcpCM}}</td>
+                        <td>{{gcpRM}}</td>
+                        <td>{{gcpWM | number : '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <th>n1-highmem-8 (8/52)</th>
+                        <td>{{gcpCL}}</td>
+                        <td>{{gcpRL}}</td>
+                        <td>{{gcpWL | number : '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <th>n1-highmem-16 (16/104)</th>
+                        <td>{{gcpCXL}}</td>
+                        <td>{{gcpRXL}}</td>
+                        <td>{{gcpWXL | number : '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <th>n1-standard-32 (32/120)</th>
+                        <td>{{gcpCXXL}}</td>
+                        <td>{{gcpRXXL}}</td>
+                        <td>{{gcpWXXL}}</td>
+                    </tr>
+                    <tr>
+                        <th>n1-highmem-64 (64/416)</th>
+                        <td>{{gcpCXXXL}}</td>
+                        <td>{{gcpRXXXL}}</td>
+                        <td>{{gcpWXXXL | number : '1.2-2'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Jumbo</th>
+                        <td>{{bbyCJumbo}}</td>
+                        <td>{{bbyRJumbo}}</td>
+                        <td>{{bbyWJumbo}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h3>STORAGE</h3>
+    <table>
+        <tr>
+            <th>BBY ($/Gb-mnth)</th>
+            <th>Azure ($/Gb-mnth)</th>
+            <th>AWS ($/Gb-mnth)</th>
+            <th>GCP ($/Gb-mnth)</th>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 112px;">
+                    <!-- <tr>
+                            <th>SAN-HDD (used for VMs)</th>
+                            <td>0.0335</td> 
+                        </tr> -->
+                    <tr>
+                        <th>SAN</th>
+                        <td>{{bby1}}</td>
+                    </tr>
+                    <tr>
+                        <th>NAS</th>
+                        <td>{{bby3}}</td>
+                    </tr>
+                    <tr>
+                        <th>Object</th>
+                        <td>{{bby4}}</td>
+                    </tr>
+                    <tr>
+                        <th>Backup</th>
+                        <td>{{bby5}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <!-- <tr>
+                                <th>Managed Disk-STD-LRS</th>
+                                <td>0.05</td> 
+                            </tr> -->
+                    <tr>
+                        <th>Managed Disk-PREM-LRS</th>
+                        <td>{{azure1}}</td>
+                    </tr>
+                    <tr>
+                        <th>File</th>
+                        <td>{{azure3}}</td>
+                    </tr>
+                    <tr>
+                        <th>Block Blob Hot</th>
+                        <td>{{azure4}}</td>
+                    </tr>
+                    <tr>
+                        <th>Block Blob Cool</th>
+                        <td>{{azure5}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <!-- <tr>
+                                    <th>EBS HDD</th>
+                                    <td>0.067</td> 
+                                </tr> -->
+                    <tr>
+                        <th>EBS SSD (General Purpose is SSD in AWS)</th>
+                        <td>{{aws1}}</td>
+                    </tr>
+                    <tr>
+                        <th>Amazon Elastic File System </th>
+                        <td>{{aws3}}</td>
+                    </tr>
+                    <tr>
+                        <th>S3-Standard</th>
+                        <td>{{aws4}}</td>
+                    </tr>
+                    <tr>
+                        <th>S3 Standard - Infrequent Access</th>
+                        <td>{{aws5}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <!-- <tr>
+                                        <th>Standard persistent disks</th>
+                                        <td>0.04</td> 
+                                    </tr> -->
+                    <tr>
+                        <th>SSD persistent disks</th>
+                        <td>{{gcp1}}</td>
+                    </tr>
+                    <tr>
+                        <th>Regional Storage</th>
+                        <td>{{gcp3}}</td>
+                    </tr>
+                    <tr>
+                        <th>Regional Storage</th>
+                        <td>{{gcp4}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nearline Storage</th>
+                        <td>{{gcp5}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h3>NETWORK</h3>
+    <table style="width:50%">
+        <tr>
+            <th>Range</th>
+            <th>Azure</th>
+            <th>AWS</th>
+            <th>GCP</th>
+        </tr>
+        <tr>
+            <th>
+                <1TB</th>
+                    <td>{{azureN1}}</td>
+                    <td>{{awsN1}}</td>
+                    <td>{{gcpN1}}</td>
+        </tr>
+        <tr>
+            <th>1-5 TB</th>
+            <td>{{azureN2}}</td>
+            <td>{{awsN2 | number : '1.2-2'}}</td>
+            <td>{{gcpN2}}</td>
+        </tr>
+        <tr>
+            <th>5-10TB</th>
+            <td>{{azureN3 | number : '1.2-2'}}</td>
+            <td>{{awsN3 | number : '1.2-2'}}</td>
+            <td>{{gcpN3 | number : '1.2-2'}}</td>
+        </tr>
+        <tr>
+            <th>10-20TB</th>
+            <td>{{azureN4 | number : '1.2-2'}}</td>
+            <td>{{awsN4 | number : '1.2-2'}}</td>
+            <td>{{gcpN4 | number : '1.2-2'}}</td>
+        </tr>
+    </table>
+    <br>
+    <h3>OTHER CONSTANTS</h3>
+    <table style="width:50%">
+        <tr>
+            <th>BBY Private Cloud Elasticity Savings (%)</th>
+            <td>{{bes}}</td>
+        </tr>
+        <tr>
+            <th>PaaS savings (%)</th>
+            <td>{{paas}}</td>
+        </tr>
+        <tr>
+            <th>Azure Discount (%)</th>
+            <td>{{azureD}}</td>
+        </tr>
+        <tr>
+            <th>AWS Discount (%)</th>
+            <td>{{awsD}}</td>
+        </tr>
+        <tr>
+            <th>GCP Discount (%)</th>
+            <td>{{gcpD}}</td>
+        </tr>
+        <tr>
+            <th>RI Azure Discount (%)</th>
+            <td>{{riazureDis}}</td>
+        </tr>
+        <tr>
+            <th>RI AWS Discount (%)</th>
+            <td>{{riawsDis}}</td>
+        </tr>
+        <tr>
+            <th>SU GCP Discount (%)</th>
+            <td>{{sugcpDis}}</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+</div>

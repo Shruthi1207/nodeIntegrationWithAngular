@@ -1,0 +1,488 @@
+﻿
+<!-- <button type="button" class="btn btn-primary btn-sm top-left" (click)="cancel()">
+    <span class="glyphicon glyphicon-step-backward"></span> Back
+</button> -->
+
+<div class="alert alert-success" *ngIf="saved">
+    <strong>Info about the app details stored/updated successfully!!</strong></div>
+
+<div class="container">
+        <div class="alert alert-info" *ngIf="!assessmentAppDetails && !saved">
+                        <strong>No Application Details Selections Found.</strong> Please provide the application details.
+                      </div>
+<h3>Application Details</h3>
+<hr>
+<small>
+    <form [formGroup]="appDetailsGroup" (ngSubmit)="onSubmit()">
+<h4><font color="#db991e"><b>Application Architecture</b></font></h4>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application architected based on cloud technologies?</label></div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+        <input type="radio" formControlName="appArchitecture1" value="yes"> Yes &nbsp;&nbsp;
+        <input type="radio" formControlName="appArchitecture1" value="no"> No
+    </div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application support autoscaling?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+        <input type="radio" formControlName="appArchitecture2" value="yes"> Yes &nbsp;&nbsp;
+        <input type="radio" formControlName="appArchitecture2" value="no"> No
+</div>
+</div>
+<br><div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application use containers?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+        <input type="radio" formControlName="appArchitecture3" value="yes"> Yes &nbsp;&nbsp;
+        <input type="radio" formControlName="appArchitecture3" value="no"> No
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application use microservices?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+        <input type="radio" formControlName="appArchitecture4" value="yes"> Yes &nbsp;&nbsp;
+        <input type="radio" formControlName="appArchitecture4" value="no"> No
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application stateless?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+        <input type="radio" formControlName="appArchitecture5" value="yes"> Yes &nbsp;&nbsp;
+        <input type="radio" formControlName="appArchitecture5" value="no"> No
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application use real time analytics?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+    <input type="radio" formControlName="appArchitecture6" value="yes"> Yes &nbsp;&nbsp;
+    <input type="radio" formControlName="appArchitecture6" value="no"> No
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application follow a traditional 2-tier or 3-tier application architecture?</label></div>
+</div>
+<div class="row">
+<div class="col-md-12 col-lg-12 col-xs-12">
+    <input type="radio" formControlName="appArchitecture7" value="yes" > Yes &nbsp;&nbsp;
+    <input type="radio" formControlName="appArchitecture7" value="no" > No<br>
+    <!-- <input type="checkbox" id="myChecka" formControlName="appArchitecture8a" value="Web"> Web &nbsp;&nbsp;
+    <input type="checkbox" id="myCheckb" formControlName="appArchitecture8b" value="Messaging"> Messaging &nbsp;&nbsp;
+    <input type="checkbox" id="myCheckc" formControlName="appArchitecture8c" value="Middle Tier1"> Middle Tier1 &nbsp;&nbsp;
+    <input type="checkbox" id="myCheckd" formControlName="appArchitecture8d" value="Middle Tier2"> Middle Tier2 &nbsp;&nbsp;
+    <input type="checkbox" id="myChecke" formControlName="appArchitecture8e" value="Cache"> Cache &nbsp;&nbsp;
+    <input type="checkbox" id="myCheckf" formControlName="appArchitecture8f" value="Data Tier"> Data Tier &nbsp;&nbsp;
+    <input type="checkbox" id="myCheckg" formControlName="appArchitecture8g" value="Remote Service"> Remote Service &nbsp; -->
+</div>
+</div> 
+<br>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12"><label>What is the application workload? Please select from drop down and provide any comments </label></div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+            <select formControlName="appWorkload" class="select-box">
+                    <option value="static" >Static</option>
+                    <option value="periodic">Periodic</option>
+                    <option value="unpredictable">Unpredictable</option>
+                    <option value="onoff">On and Off</option>
+                    <option value="growingfast">Growing Fast</option>
+                    <option value="mixed">Mixed</option>
+            </select>
+        </div>
+        <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                <textarea rows="5" cols="50" formControlName="appWorkloadText" class="input-style"></textarea>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6">
+                    <img src="/images/Workloads.jpg">
+                    </div>
+            </div>
+            
+        </div>
+<hr>
+<h4><font color="#db991e"><b>Network Services</b></font></h4>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application use a WAF, Load Balancing, or Layer 7? If other, which ones?</label></div>
+</div>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+                <input type="checkbox" formControlName="netServicesa" value="WAF"> WAF &nbsp;&nbsp;
+                <input type="checkbox" formControlName="netServicesb" value="Load Balancing"> Load Balancing &nbsp;&nbsp;
+                <input type="checkbox" formControlName="netServicesc" value="Layer 7"> Layer 7 &nbsp;&nbsp;
+                <input type="checkbox" formControlName="netServicesd" value="Other"> Other <br>
+                <textarea rows="1" cols="30" formControlName="netServicesText" class="input-style"></textarea>
+            </div>
+        </div>
+<hr>
+<h4><font color="#db991e"><b>Hosting Location</b></font></h4>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application hosted in a DMZ or NA?</label></div>
+</div>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <input type="checkbox" formControlName="hostLocationa" value="DMZ"> DMZ &nbsp;&nbsp;
+            <input type="checkbox" formControlName="hostLocationb" value="NA"> NA &nbsp;&nbsp;
+            <input type="checkbox" formControlName="hostLocationc" value="PCI-NA"> PCI-NA &nbsp;&nbsp;
+        </div>
+    </div>
+<hr>
+<h4><font color="#db991e"><b>PCI Compliance</b></font></h4>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application PCI compliant?</label></div>
+</div>
+<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+                <input type="radio" formControlName="pciCompliance" value="yes"> Yes &nbsp;&nbsp;
+                <input type="radio" formControlName="pciCompliance" value="no"> No
+            </div>
+        </div>
+<hr>
+        <h4><font color="#db991e"><b>Integration</b></font></h4>
+    <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application a system of record for other applications? If yes, please select the type of integration below.</label></div>
+    </div>
+    <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12">
+                    <input type="radio" formControlName="integrationd" value="yes" (click)="activei()"> Yes &nbsp;&nbsp;
+                    <input type="radio" formControlName="integrationd" value="no" (click)="disablei()"> No<br>
+                    <input type="checkbox" id="i1" formControlName="integrationa" value="Batch / File-based"> Batch / File-based (< 60 min latency requirement) <br> 
+                    <input type="checkbox" id="i2" formControlName="integrationb" value="Queue"> Queue (< 60 sec latency requirement) <br>
+                    <input type="checkbox" id="i3" formControlName="integrationc" value="API"> API (Real time / < 10 ms latency requirement) <br>
+                </div>
+        </div><br>
+        <div class="row">
+                <div class="col-md-12 col-lg-12 col-xs-12"><label>What is the application's SLA? What is the required availability for the application (example: 99.99%)?</label></div>
+        </div>
+        <div class="row">
+                <div class="col-md-12 col-lg-12 col-xs-12">
+                        <select formControlName="sla1" class="select-box">
+                                <option value="99%(7.2h/mnth)" >99%(7.2h/mnth)</option>
+                                <option value="99.9% (44min/mnth)">99.9%(44min/mnth)</option>
+                                <option value="99.99%(4 min/mnth)">99.99%(4 min/mnth)</option>
+                                <option value="99.999%(25sec/mnth)">99.999%(25sec/mnth)</option>
+                                <option value="(>99.999%)">(>99.999%)</option>
+                                <option value="don’t know">don’t know</option>
+                        </select>
+                    </div>
+            </div>
+            <br>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12"><label>What is the storage performance of the data tier?</label></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12">
+                    <input type="checkbox" formControlName="sla2a" value="SAN"> SAN &nbsp;&nbsp; 
+                    <!-- <input type="checkbox" formControlName="sla2b" value="SAN SSD">SAN SSD &nbsp;&nbsp; -->
+                    <input type="checkbox" formControlName="sla2c" value="NAS/File">NAS/File &nbsp;&nbsp;
+                    <input type="checkbox" formControlName="sla2d" value="Object ">Object &nbsp;&nbsp;
+                </div>
+        </div>
+        <br><div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12"><label>What is the expected response time for this application?</label></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12">
+                    <select formControlName="sla3" class="select-box">
+                            <option value="(<100ms)" >less than 100ms</option>
+                            <option value=" 100-200ms"> 100-200ms</option>
+                            <option value="200-400ms">200-400ms</option>
+                            <option value="400 ms to 1 sec">400 ms to 1 sec</option>
+                            <option value="minutes">minutes</option>
+                            <option value="hours">hours</option>
+                            <option value="days">days</option>
+                    </select>
+                </div>
+        </div>
+        <hr>
+                <h4><font color="#db991e"><b>Business Continuity / Disaster Recovery (BC/DR) needs</b></font></h4>
+            <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xs-12"><label>Recovery Point Objective (RPO)</label></div>
+            </div>
+            <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                            <input type="checkbox" formControlName="bcdr1a" value="Tier 0">Tier 0 (< 15 min) &nbsp;&nbsp; 
+                            <input type="checkbox" formControlName="bcdr1b" value="Tier 1">Tier 1 (< 2 hrs) &nbsp;&nbsp;
+                            <input type="checkbox" formControlName="bcdr1c" value="Tier 2">Tier 2 (< 24 hrs) &nbsp;&nbsp;
+                            <input type="checkbox" formControlName="bcdr1d" value="Tier 3">Tier 3 (< 48 hrs) &nbsp;&nbsp;
+                            <input type="checkbox" formControlName="bcdr1e" value="Tier 4">Tier 4 (< 120 hrs) &nbsp;&nbsp;
+                    </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-xs-12"><label>Recovery Time Objective (RTO)</label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-xs-12">
+                        <input type="checkbox" formControlName="bcdr2a" value="Tier 0">Tier 0 (< 15 min) &nbsp; 
+                        <input type="checkbox" formControlName="bcdr2b" value="Tier 1">Tier 1 (< 48 hrs) &nbsp;
+                        <input type="checkbox" formControlName="bcdr2c" value="Tier 2">Tier 2 (< 2 weeks) &nbsp;
+                        <input type="checkbox" formControlName="bcdr2d" value="Tier 3">Tier 3 (< 1 month) &nbsp;
+                        <input type="checkbox" formControlName="bcdr2e" value="Tier 4">Tier 4 (< 3 months) &nbsp;
+                    </div>
+            </div>
+            <hr>
+            <h4><font color="#db991e"><b>Databases and Dependencies </b></font></h4>
+      
+                    <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xs-12"><label>What is the application's backend Database? Select the application database(s). Please specify in case of Other.</label></div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                    <input type="checkbox" formControlName="appDatabasea" value="Oracle">Oracle &nbsp; 
+                                    <input type="checkbox" formControlName="appDatabaseb" value="MSSQL">MSSQL &nbsp;
+                                    <input type="checkbox" formControlName="appDatabasec" value="Cassandra">Cassandra &nbsp;
+                                    <input type="checkbox" formControlName="appDatabased" value="Hadoop">Hadoop &nbsp;
+                                    <input type="checkbox" formControlName="appDatabasee" value="Other">Other &nbsp;
+                                    <textarea rows="1" cols="50" formControlName="appDatabaseText" class="input-style"></textarea>
+                                </div>
+                        </div><br>
+                        <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xs-12"><label>What are the application's dependencies?</label></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                    <textarea rows="1" cols="30" formControlName="appDependancyText" class="input-style"></textarea>
+                                    </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application using a Hardware Security Module (HSM)?</label></div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xs-12">
+                                            <input type="radio" formControlName="appDependancy" value="yes" > Yes &nbsp;&nbsp;
+                                            <input type="radio" formControlName="appDependancy" value="no"> No
+                                        </div>
+                                </div>
+                                <hr>
+                                            <h4><font color="#db991e"><b>Governance</b></font></h4>
+                                        <div class="row">
+                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application have any security policies or designs available for review?</label></div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                    <input type="radio" formControlName="appSecurity1" value="yes"> Yes &nbsp;&nbsp;
+                                                    <input type="radio" formControlName="appSecurity1" value="no"> No
+                                                </div>
+                                            </div>
+                                            <br>
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xs-12"><label>Please identify what type of data the application is using / processing / storing? (select all that apply)</label></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                                <input type="checkbox" formControlName="appSecurity2a" value="Public">Public &nbsp;&nbsp;
+                                                <input type="checkbox" formControlName="appSecurity2b" value="Internal">Internal &nbsp;&nbsp;
+                                                <input type="checkbox" formControlName="appSecurity2c" value="Restricted">Restricted &nbsp;&nbsp;
+                                                <input type="checkbox" formControlName="appSecurity2d" value="Sensitive">Sensitive &nbsp;&nbsp;
+                                            </div>
+                                        </div>
+                                        <br><div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application have any Enterprise Information Protection (EIP) exceptions?</label></div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                                <input type="radio" formControlName="appSecurity3" value="yes"> Yes &nbsp;&nbsp;
+                                                <input type="radio" formControlName="appSecurity3" value="no"> No
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h4><font color="#db991e"><b>Compliance</b></font></h4>
+                                        <div class="row">
+                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Laws and Regulations: The Best Buy data center is compliant with public laws and regulations. Will the application stay compliant with those laws if it is migrated to the cloud?</label></div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                    <input type="radio" formControlName="appSecurity4" value="yes"> Yes &nbsp;&nbsp;
+                                                    <input type="radio" formControlName="appSecurity4" value="no"> No
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                    <div class="col-md-12 col-lg-12 col-xs-12"><label>Has legal provided approval to move this application and its data to the cloud / external hosting?</label></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-12 col-lg-12 col-xs-12">
+                                                        <input type="radio" formControlName="appSecurity5" value="yes"> Yes &nbsp;&nbsp;
+                                                        <input type="radio" formControlName="appSecurity5" value="no"> No
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                        <div class="col-md-12 col-lg-12 col-xs-12"><label>Will the application stay compliant with laws related to moving data across borders if needed?</label></div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-md-12 col-lg-12 col-xs-12">
+                                                            <input type="radio" formControlName="appSecurity6" value="yes"> Yes &nbsp;&nbsp;
+                                                            <input type="radio" formControlName="appSecurity6" value="no"> No
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <h4><font color="#db991e"><b>Compliance Checkpoint</b></font></h4>
+                                                    <div class="row">
+                                                            <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application subject to HIPAA compliance?</label></div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                <input type="radio" formControlName="appSecurity7" value="yes"> Yes &nbsp;&nbsp;
+                                                                <input type="radio" formControlName="appSecurity7" value="no"> No
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application subject to SOX compliance?</label></div>
+                                                        </div>
+                                                        <div class="row">
+                                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                    <input type="radio" formControlName="appSecurity8" value="yes"> Yes &nbsp;&nbsp;
+                                                                    <input type="radio" formControlName="appSecurity8" value="no"> No
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            
+                                                                <div class="row">
+                                                                        <div class="col-md-12 col-lg-12 col-xs-12"><label>Is the application subject to any other regulatory compliance? If so, list them here.</label></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                        <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                            <input type="radio" formControlName="appSecurity10" value="yes"> Yes &nbsp;&nbsp;
+                                                                            <input type="radio" formControlName="appSecurity10" value="no"> No
+                                                                            <textarea rows="1" cols="30" formControlName="appSecurity10Text" class="input-style"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <h4><font color="#db991e"><b>Trust</b></font></h4>
+                                                                    <div class="row">
+                                                                            <div class="col-md-12 col-lg-12 col-xs-12"><label>Internal Access: Will migration to the cloud change how the application or its components / services are accessed internally? Will migration create more, uncontrolled access points?</label></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                <input type="radio" formControlName="appSecurity11" value="yes"> Yes &nbsp;&nbsp;
+                                                                                <input type="radio" formControlName="appSecurity11" value="no"> No
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Visibility: Unlike in the traditional data center, the cloud security model assumes shared responsibility (based on the type of service consumed). Will there be a sufficient level of access and visibility to information needed for the application?</label></div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                    <input type="radio" formControlName="appSecurity12" value="yes"> Yes &nbsp;&nbsp;
+                                                                                    <input type="radio" formControlName="appSecurity12" value="no"> No
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <h4><font color="#db991e"><b>Unknown Risks</b></font></h4>
+                                                                            <div class="row">
+                                                                                    <div class="col-md-12 col-lg-12 col-xs-12"><label>Will the Level 2 (L2) Operations team be able to support the application once migrated?</label></div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                    <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                        <input type="radio" formControlName="appSecurity13" value="yes"> Yes &nbsp;&nbsp;
+                                                                                        <input type="radio" formControlName="appSecurity13" value="no"> No
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br>
+                                                                                <div class="row">
+                                                                                        <div class="col-md-12 col-lg-12 col-xs-12"><label>If yes, does the L2 team have SOPs/STPs for cloud-based applications? If no, one of the deliverables should be reviewing and adjusting current SOP/STPs for cloud.</label></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                        <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                            <input type="radio" formControlName="appSecurity14" value="yes"> Yes &nbsp;&nbsp;
+                                                                                            <input type="radio" formControlName="appSecurity14" value="no"> No
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    
+                                                                                        <hr>
+                                                                                        <h4><font color="#db991e"><b>Identity and Access Management</b></font></h4>
+                                                                                        <div class="row">
+                                                                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Authentication: specify which authentication mechanisms are used today (AD, LDAP, etc.)</label></div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                                    <input type="checkbox" formControlName="appSecurity16a" value="AD">AD &nbsp;&nbsp; 
+                                                                                                    <!-- <input type="checkbox" formControlName="appSecurity16b" value="ODS">ODS &nbsp;&nbsp; -->
+                                                                                                    <input type="checkbox" formControlName="appSecurity16c" value="LDAP">LDAP &nbsp;&nbsp;
+                                                                                                    <input type="checkbox" formControlName="appSecurity16d" value="Other">Other &nbsp;&nbsp;
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <br>
+                                                                                            <div class="row">
+                                                                                                    <div class="col-md-12 col-lg-12 col-xs-12"><label>Access Control: Does the application use Role Based Access Control (RBAC)?</label></div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                    <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                                        <input type="radio" formControlName="appSecurity17" value="yes"> Yes &nbsp;&nbsp;
+                                                                                                        <input type="radio" formControlName="appSecurity17" value="no"> No
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <hr>
+                                                                                                <h4><font color="#db991e"><b>Availability</b></font></h4>
+                                                                                                <div class="row">
+                                                                                                        <div class="col-md-12 col-lg-12 col-xs-12"><label>Does the application require High Availability (HA)?</label></div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                        <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                                            <input type="radio" formControlName="appSecurity18" value="yes"> Yes &nbsp;&nbsp;
+                                                                                                            <input type="radio" formControlName="appSecurity18" value="no"> No
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <br>
+                                                                                                    <div class="row">
+                                                                                                            <div class="col-md-12 col-lg-12 col-xs-12"><label>Is there a contingency plan for the application in case the cloud is not available?</label></div>
+                                                                                                    </div>
+                                                                                                    <div class="row">
+                                                                                                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                                                <input type="radio" formControlName="appSecurity19" value="yes"> Yes &nbsp;&nbsp;
+                                                                                                                <input type="radio" formControlName="appSecurity19" value="no"> No
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <br>
+                                                                                                        <div class="row">
+                                                                                                                <div class="col-md-12 col-lg-12 col-xs-12"><label>Will the existing BC/DR infrastructure design change with the migration to the cloud?</label></div>
+                                                                                                        </div>
+                                                                                                        <div class="row">
+                                                                                                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                                                                    <input type="radio" formControlName="appSecurity20" value="yes"> Yes &nbsp;&nbsp;
+                                                                                                                    <input type="radio" formControlName="appSecurity20" value="no"> No
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <br>
+                                                                                                            
+                                <br>
+                                <!-- <button type="button" class="btn btn-info" (click)="cancel()">
+                                        <span class="glyphicon glyphicon-step-backward"></span> Back
+                                    </button>                                    
+                                <button class="btn btn-primary" type="submit">Save</button>&nbsp;&nbsp;
+                                &nbsp;&nbsp; -->
+                                <button type="button" class="btn btn-primary" (click) = "assessmentHomeClick();">Assessment Home</button>
+                                <button type="button" class="btn btn-primary" [disabled]="!this.saved && !savedAlready" (click) = "decisionMatrixClick();">2: Decision Matrix</button>
+                                <button type="button" class="btn btn-primary" [disabled]="!this.saved && !savedAlready" (click) = "hostingCalculatorClick();">3: Hosting Calculator</button>
+                                <button type="button" class="btn btn-success" [disabled]="!this.saved && !savedAlready" (click)="resultsClick()">Results</button>
+                                <hr>
+                                    <button type="button" class="btn btn-info" (click)="cancel()">
+                                        <span class="glyphicon glyphicon-step-backward"></span> Back
+                                    </button>  
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                            </form>
+                        </small>
+                        
+                        <br>
+</div>

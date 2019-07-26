@@ -1,0 +1,20 @@
+use cloudgate
+db.networkprices.drop()
+try {
+   db.networkprices.insertMany( [
+    { networktype:"azure",index:1,networkRange:"<1TB",cost:"88.65"},
+    { networktype:"azure",index:2,networkRange:"1-5 TB",cost:"445.01"},
+    { networktype:"azure",index:3,networkRange:"5-10TB",cost:"890.45"},
+    { networktype:"azure",index:4,networkRange:"10-20TB",cost:"1740.37"},
+    { networktype:"aws",index:1,networkRange:"<1TB",cost:"188.01"},
+    { networktype:"aws",index:2,networkRange:"1-5 TB",cost:"556.65"},
+    { networktype:"aws",index:3,networkRange:"5-10TB",cost:"1017.35"},
+    { networktype:"aws",index:4,networkRange:"10-20TB",cost:"1887.75"},
+    { networktype:"gcp",index:1,networkRange:"<1TB",cost:"122.88"},
+    { networktype:"gcp",index:2,networkRange:"1-5 TB",cost:"573.44"},
+    { networktype:"gcp",index:3,networkRange:"5-10TB",cost:"1136.64"},
+    { networktype:"gcp",index:4,networkRange:"10-20TB",cost:"1955.84"},
+   ] );
+} catch (e) {
+   print (e);
+}

@@ -1,0 +1,90 @@
+<div *ngIf="isDone==true" class="container">
+  <div class="page-header" [hidden]="existingAppID">
+     <h2 >Create New Assessment</h2>
+  </div>
+  <div class="page-header" [hidden]="!existingAppID">
+     <h2 >Update Existing Assessment</h2>
+  </div>
+     
+
+  <form [formGroup]="myForm" >
+    <div *ngIf="message" class="row">
+				<ng-container *ngIf="!isError">
+					<div class="alert alert-success"><p [innerHTML]="message"> </p></div>
+				</ng-container>
+				<ng-container *ngIf="isError">
+						<div class="alert alert-danger"><p [innerHTML]="message"> </p></div>
+				</ng-container>
+		</div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="appName">Application Name</label>
+          <input id="appName" type="text" class="form-control" name="appName" formControlName="appName">
+          <div [hidden]="myForm.controls['appName'].valid || myForm.controls['appName'].pristine" class="alert alert-danger"> Application Name is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="appId" title="This the 3 letter acronym used in ServiceNow as the system code.  It is used in the names of the VM's" >IT System Name (MDR Code)</label>
+          <input id="appId" type="text" class="form-control" name="appId" formControlName="appId" >
+          <div [hidden]="myForm.controls['appId'].valid || myForm.controls['appId'].pristine" class="alert alert-danger"> App ID is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xs-6">
+        <div class="form-group">
+          <label for="pcm">PCM / Engineering Lead</label>
+          <input id="pcm" type="text" class="form-control" name="pcm" formControlName="pcm">
+          <div [hidden]="myForm.controls['pcm'].valid || myForm.controls['pcm'].pristine" class="alert alert-danger"> PCM is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xs-6">
+          <div class="form-group">
+            <label for="vp" >VP</label>
+            <input id="vp" type="text" class="form-control" name="vp" formControlName="vp">            
+          </div>
+        </div>      
+    </div>
+    
+    
+
+
+    <div class="row buttons">
+        <!-- <button type="submit" [disabled]="!myForm.valid" (click)="save(myForm.value, myForm.valid, 'save');" class="btn btn-primary">Save</button> -->
+        <button type="submit" [disabled]="!this.existingAppID " class="btn btn-primary" (click) = "infoAppDetailsClick();" >1: Info About The App</button>
+        <button type="submit" [disabled]="!this.existingAppID " class="btn btn-primary" (click) = "decisionMatrixClick();">2: Decision Matrix</button>
+        <button type="submit" [disabled]="!this.existingAppID " class="btn btn-primary" (click) = "hostingCalculatorClick();">3: Hosting Calculator</button>
+        <button *ngIf="existingAppID && (isAdmin() || isLocked())" type="button" class="btn btn-success" (click)="resultsClick()">Results</button>
+
+        <button *ngIf="existingAppID && isAdmin()" type="button" class="btn btn-danger" (click)="modal.show()">Delete Assessment</button>
+        
+        <app-modal #modal>
+          <div class="app-modal-header">
+                  <img style="width:30px; height:30px; vertical-align: middle;" src="/images/warning.png" />
+                  &nbsp;<b>Please read the below before proceeding...</b>
+          </div>
+          <div class="app-modal-body">
+              Deleting the Assessment will permanently delete all the data associated to this assessment and you will not be
+              able to recover it.
+          </div>
+          <div class="app-modal-footer">
+              <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
+              <button type="button" class="btn btn-primary" (click)="deleteAssessment(modal)">Continue with Delete</button>
+          </div>
+        </app-modal>
+    </div>
+    <hr>
+    <div class="row buttons">
+       <button type="button" class="btn btn-info" (click)="backClicked()">
+        <span class="glyphicon glyphicon-step-backward"></span> Back
+      </button>
+      <button type="submit" [disabled]="!myForm.valid" (click)="save(myForm.value, myForm.valid, 'save');" class="btn btn-primary">Save</button>
+    </div>
+
+  </form>
+
+  
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <div *ngIf="message" style="margin-top:20px; margin-left: 0; width: 400px;">
+      <ng-container *ngIf="!isError">
+        <div class="alert alert-success"><p [innerHTML]="message"> </p></div>
+      </ng-container>
+      <ng-container *ngIf="isError">
+          <div class="alert alert-danger"><p [innerHTML]="message"> </p></div>
+      </ng-container>
+    </div>
+    <div class="banner">
+      <div class="row">
+        <h2 class="logo-font" style="margin-top:25px;">Welcome to CloudPath</h2>
+        <p>An interactive Cloud Decision Matrix and Cloud Comparison Calculator</p>
+      </div>
+    </div>
+
+     <div class="row">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            <div class="btn-group ">
+              <button type="button" class="btn btn-primary " (click)="startNew();">Start New</button>
+              <button type="button" class="btn btn-primary " id="openExistingBtn" (click)="OpenExistingAppModal()">Open Existing</button>
+              <!-- <app-existing-apps></app-existing-apps> -->
+            </div>
+          </ul>
+      </div>      
+      <form #modalForm="ngForm">
+        <modal #ExistingAppModal>
+          <modal-header [show-close]="true">
+            <h4 class="modal-title">Existing Assessments</h4>
+          </modal-header>
+          <modal-body>
+            <table class="table">
+              <tr>
+                <th>#</th>
+                <th>App Name</th>
+                <th>App ID</th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let assessment of assessments; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{assessment.appName}}</td>
+                <td>{{assessment.appId}}</td>
+                <td><button type="button" class="btn btn-info" (click)="OpenExisting(assessment.id)">Open</button></td>
+              </tr>
+            </table>
+          </modal-body>
+          <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="ExistingAppModal" (click)="ExistingAppModal.dismiss()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="startNew()">Start New</button>
+          </modal-footer>
+        </modal>
+      </form>
+
+    </div>
+</div>

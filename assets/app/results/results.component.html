@@ -1,0 +1,631 @@
+﻿<div class="alert alert-warning" *ngIf="warning">
+    Hosting Cost has been updated. Please re-save to get updated results!!
+    <button type="button" class="btn btn-primary" (click)="hostingCalculatorClick();">
+        Re-save
+    </button>
+</div>
+
+<div id="print-section" class="container">
+    <div class="row">
+        <div class="col-md-13">
+            <h3>Application Decision Matrix Results for
+                <i> {{ appName }}</i> (App ID-
+                <i>{{ appId }})</i>
+            </h3>
+            <br>
+            <div class="table-responsive">
+                <table id="mytable" class="matrix">
+                    <thead>
+                        <th class="r-cell-0"></th>
+                        <th class="r-cell-1">
+                            <span>Public&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> IaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Rehost</span>&nbsp;
+                            <span [tooltip]="r1" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>Public&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> IaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Replatform</span>&nbsp;
+                            <span [tooltip]="r2" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>Public&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> PaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Refactor</span>&nbsp;
+                            <span [tooltip]="r3" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>Public&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> SaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Replace</span>&nbsp;
+                            <span [tooltip]="r4" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>
+                                <br>Hybrid&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Cloud</span>&nbsp;
+                            <span [tooltip]="r5" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>Private&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> IaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Replatform</span>&nbsp;
+                            <span [tooltip]="r6" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                        <th class="r-cell-1">
+                            <span>Private&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br>PaaS&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br> Refactor</span>&nbsp;
+                            <span [tooltip]="r7" class="glyphicon glyphicon-info-sign"></span>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="r-cell-0">
+                                <b>Final Decision Matrix Results</b>
+                            </td>
+                            <ng-container *ngFor="let score of finalScores">
+                                <td [ngClass]="score.style">{{score.text}}</td>
+                            </ng-container>
+                        </tr>
+                        <tr *ngIf="showScores">
+                            <td class="r-cell-0">Cloud Benefit Scores</td>
+                            <td class="score1" *ngFor="let score of migrationGoalScores">{{score}}</td>
+                        </tr>
+                        <tr *ngIf="showScores">
+                            <td class="r-cell-0">Cloud Barrier Scores</td>
+                            <ng-container *ngFor="let score of barrierScores">
+                                <td class="score red" *ngIf="score == 0">Barriers</td>
+                                <td class="score" *ngIf="score > 0">No Barriers</td>
+                            </ng-container>
+                        </tr>
+                        <tr *ngIf="showScores">
+                            <td class="r-cell-0">Overall Scores</td>
+                            <ng-container *ngFor="let score of finalScores">
+                                <td class="score red" *ngIf="score.score == 0">{{score.score}}</td>
+                                <td class="score" *ngIf="score.score > 0">{{score.score}}</td>
+                            </ng-container>
+                        </tr>
+                        <tr>
+                            <td class="link-row">
+                                <a class="nav" (click)="toggleShowScores()">See Score Details</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row myrow">
+        <ng-container *ngIf="getAssessmentAppDetailsCount()>0">
+            <tr>
+                <ng-container *ngIf="shouldSeeAssessmentAppDetails == false">
+                    <td colspan=2>
+                        <a class="nav" (click)="toggleSeeMoreAssessmentAppDetails(true)">See Info About the App Details...</a>
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="shouldSeeAssessmentAppDetails == true">
+                    <td colspan=2>
+                        <a class="nav" (click)="toggleSeeMoreAssessmentAppDetails(false)">See Info About the App Details...</a>
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-container>
+        <h5 *ngIf="shouldSeeAssessmentAppDetails" class="header">Info About the App Details</h5>
+        <div *ngIf="shouldSeeAssessmentAppDetails" class="table-responsive">
+            <table class="matrix">
+                <thead>
+                    <th style="width: 700px; text-align:left;">Questions</th>
+                    <th style="text-align:left; padding-left: 10px;">Answers</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goal of selectedAssessmentAppDetails;  let i=index">
+                        <ng-container>
+                            <td>{{goal.text}}</td>
+                            <td style="text-align:left; padding-left: 10px;">{{goal.value}}</td>
+                        </ng-container>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <h5 *ngIf="areThereBenefitSelections()" class="header">Top Ranked Cloud Benefits Selected</h5>
+        <div *ngIf="areThereBenefitSelections()" class="table-responsive">
+            <table *ngIf="areThereMigrationGoals5Weight()" class="matrix">
+                <thead>
+                    <th style="width: 80px; text-align:left;" hidden>Rank</th>
+                    <th style="text-align:left;">Must have Cloud Benefits</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goal of selectedMigrationGoals5Weight;  let i=index">
+                        <ng-container *ngIf="i< getViewableGoalCountWeight5()">
+                            <td class="right" hidden>{{goal.rank}}</td>
+                            <td>{{goal.text}}</td>
+                        </ng-container>
+                    </tr>
+                    <ng-container *ngIf="getSelectedMigrationGoalsCountWeight5()>3">
+                        <tr colspan=2>
+                            <ng-container *ngIf="shouldSeeMoreMigrationGoals5 == false">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreMigrationGoals5(true)">See More...</a>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="shouldSeeMoreMigrationGoals5 == true">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreMigrationGoals5(false)">See Less</a>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <table *ngIf="areThereMigrationGoals3Weight()" class="matrix">
+                <thead>
+                    <th style="width: 80px; text-align:left;" hidden>Rank</th>
+                    <th style="text-align:left;">Good to have Cloud Benefits</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goal of selectedMigrationGoals3Weight;  let i=index">
+                        <ng-container *ngIf="i< getViewableGoalCountWeight3()">
+                            <td class="right" hidden>{{goal.rank}}</td>
+                            <td>{{goal.text}}</td>
+                        </ng-container>
+                    </tr>
+                    <ng-container *ngIf="getSelectedMigrationGoalsCountWeight3()>3">
+                        <tr colspan=2>
+                            <ng-container *ngIf="shouldSeeMoreMigrationGoals3 == false">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreMigrationGoals3(true)">See More...</a>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="shouldSeeMoreMigrationGoals3 == true">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreMigrationGoals3(false)">See Less</a>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </div>
+        <br>
+        <h5 *ngIf="areThereBarrierSelections()" class="header">Top Ranked Cloud Barriers Selected</h5>
+        <div *ngIf="areThereBarrierSelections()" class="table-responsive">
+            <table class="matrix">
+                <thead>
+                    <th style="width: 80px; text-align:left;" hidden>Rank</th>
+                    <th style="text-align:left;">Cloud Barrier</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let barrier of selectedCloudBarriers;  let i=index">
+                        <ng-container *ngIf="i<getViewableBarrierCount()">
+                            <td class="right" hidden>{{barrier.rank}}</td>
+                            <td>{{barrier.text}}</td>
+                        </ng-container>
+                    </tr>
+                    <ng-container *ngIf="getSelectedBarriersCount()>3">
+                        <tr>
+                            <ng-container *ngIf="shouldSeeMoreBarriers == false">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreBarriers(true)">See More...</a>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="shouldSeeMoreBarriers == true">
+                                <td colspan=2>
+                                    <a class="nav" (click)="seeMoreBarriers(false)">See Less</a>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col-md-13">
+            <div *ngIf="!result">
+                <h3>Application Calculator Results</h3>
+                <h4> (Monthly Cost)</h4>
+                <h5>The Hosting Calculator section has not yet been completed.</h5>
+            </div>
+            <div *ngIf="result" class="table-responsive" >
+                <h3 class="calculationHeading">Hosting Calculator Results</h3>
+                <h4 class="calculationHeading">(Monthly Cost)</h4>
+                <table *ngIf="result" style="width: 98%;" class="resultTable">
+                    <tr>
+                        <th></th>
+                        <th>BBY($)</th>
+                        <th>Azure($)</th>
+                        <th>AWS($)</th>
+                        <th>GCP($)</th>
+                    </tr>
+                    <tr style="font-size: 150%;">
+                        <td>
+                            <a (click)="togglePricing()">
+                                <b>Published Pricing*</b>
+                            </a>
+                        </td>
+                        <!-- <td>
+                            <b>{{result.TotalPerServerTotalPerType | currency:'USD':true:'1.0-0'}}</b>
+                        </td> -->
+                        <td>
+                            <b>{{this.BBYPublishedPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{AzureFinalPrice | currency:'USD':true:'1.0-0'
+                                }}
+                            </b>
+                        </td>
+                        <td>
+                            <b>{{AwsFinalPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{GCPFinalPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="ExpandPrice">
+                        <tr style="font-size: 130%;">
+                            <td>
+                                <a (click)="toggleComputePricing()">Compute</a>
+                            </td>
+
+                            <td>{{ BBYMonthlyCostComputeTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ AzureComputeTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ AWSComputeTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ GCPComputeTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+
+                        </tr>
+                        <ng-container *ngIf="ExpandComputePricing">
+                            <tr style="font-size: 110%;">
+                                <td colspan="5">
+                                    Compute OS <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                                </td>
+
+
+                            </tr>
+                            <tr *ngFor="let BBYMonthlyCostCompute of result.BBYMonthlyCostComputeArray">
+                                <td>
+                                    <b>{{ BBYMonthlyCostCompute.noOfServers}} {{BBYMonthlyCostCompute.size}} {{BBYMonthlyCostCompute.os
+                                        }}
+                                    </b>
+                                </td>
+                                <td>{{ BBYMonthlyCostCompute.bbyPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.bbyPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="result.osPriceBBYType">{{ BBYMonthlyCostCompute.bbyPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.bbyPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="result.osPriceBBYType">{{ BBYMonthlyCostCompute.bbyPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.bbyPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="result.osPriceBBYType">{{ BBYMonthlyCostCompute.bbyPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.bbyPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="!result.osPriceBBYType">{{ BBYMonthlyCostCompute.azurePriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.azurePriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="!result.osPriceBBYType">{{ BBYMonthlyCostCompute.awsPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.awsPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td *ngIf="!result.osPriceBBYType">{{ BBYMonthlyCostCompute.gcpPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.gcpPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+
+                            </tr>
+                            <tr style="font-size: 110%;">
+                                <td colspan="5">
+                                    Compute VM <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                                </td>
+
+
+                            </tr>
+                            <tr *ngFor="let BBYMonthlyCostCompute of result.BBYMonthlyCostComputeArray">
+                                <td>
+                                    <b>{{ BBYMonthlyCostCompute.noOfServers}} {{BBYMonthlyCostCompute.size}} {{BBYMonthlyCostCompute.os
+                                        }}
+                                    </b>
+                                </td>
+                                <td>{{ BBYMonthlyCostCompute.VMbbyPriceRate | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.VMbbyPriceRate * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td >{{ BBYMonthlyCostCompute.azurePriceRateVMOnly | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.azurePriceRateVMOnly * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td >{{ BBYMonthlyCostCompute.awsPriceRateVMOnly | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.awsPriceRateVMOnly * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                <td >{{ BBYMonthlyCostCompute.gcpPriceRateVMOnly | currency:'USD':true:'1.3-3'}}/hr --> {{ BBYMonthlyCostCompute.noOfServers
+                                    * BBYMonthlyCostCompute.gcpPriceRateVMOnly * 740 | currency:'USD':true:'1.0-0' }}/month</td>
+                                
+                            </tr>
+                        </ng-container>
+
+                        <tr style="font-size: 130%;">
+                            <td>
+                                <a (click)="toggleStoragePricing()">Storage </a>
+                            </td>
+
+                            <td>{{ BBYStorageTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ AzureStorageTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ AWSStorageTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{ GCPStorageTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+
+
+                        </tr>
+                        <ng-container *ngIf="ExpandStoragePricing">
+                            <tr *ngIf="result.SANCapacity != 0">
+                                <td>
+                                    <b>{{ result.SANCapacity}}GB x SAN</b>
+                                </td>
+                                <td>${{ result.sanSSDCost }}GB-mnth --> {{ result.SANCapacity * result.sanSSDCost | currency:'USD':true:'1.0-0'
+                                    }}/mnth
+                                </td>
+                                <td>${{ result.sanSSDCostAzureStorage }}GB-mnth --> {{ result.SANCapacity * result.sanSSDCostAzureStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.sanSSDCostAWSStorage }}GB-mnth --> {{ result.SANCapacity * result.sanSSDCostAWSStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.sanSSDCostGCPStorage }}GB-mnth --> {{ result.SANCapacity * result.sanSSDCostGCPStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+
+                            </tr>
+                            <tr *ngIf="result.FileNASCapacity != 0">
+                                <td>
+                                    <b>{{ result.FileNASCapacity}}GB x File</b>
+                                </td>
+                                <td>${{ result.FileNASCost }}GB-mnth --> {{ result.FileNASCapacity * result.FileNASCost | currency:'USD':true:'1.0-0'
+                                    }}/mnth
+                                </td>
+                                <td>${{ result.FileNASCostAzureStorage }}GB-mnth --> {{ result.FileNASCapacity * result.FileNASCostAzureStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.FileNASCostAWSStorage }}GB-mnth --> {{ result.FileNASCapacity * result.FileNASCostAWSStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.FileNASCostGCPStorage }}GB-mnth --> {{ result.FileNASCapacity * result.FileNASCostGCPStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+
+                            </tr>
+                            <tr *ngIf="result.ObjectCapacity != 0">
+                                <td>
+                                    <b>{{ result.ObjectCapacity}}GB x Object</b>
+                                </td>
+                                <td>${{ result.objectCost }}GB-mnth --> {{ result.ObjectCapacity * result.objectCost | currency:'USD':true:'1.0-0'
+                                    }}/mnth
+                                </td>
+                                <td>${{ result.objectCostAzureStorage }}GB-mnth --> {{ result.ObjectCapacity * result.objectCostAzureStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.objectCostAWSStorage }}GB-mnth --> {{ result.ObjectCapacity * result.objectCostAWSStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.objectCostGCPStorage }}GB-mnth --> {{ result.ObjectCapacity * result.objectCostGCPStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                            </tr>
+                            <tr *ngIf="result.BKPCapacity != 0">
+                                <td>
+                                    <b>{{ result.BKPCapacity }}GB x Backup</b>
+                                </td>
+                                <td>${{ result.backupCost }}GB-mnth --> {{ result.BKPCapacity * result.backupCost | currency:'USD':true:'1.0-0'
+                                    }}/mnth
+                                </td>
+                                <td>${{ result.backupCostAzureStorage }}GB-mnth --> {{ result.BKPCapacity * result.backupCostAzureStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.backupCostAWSStorage }}GB-mnth --> {{ result.BKPCapacity * result.backupCostAWSStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                                <td>${{ result.backupCostGCPStorage }}GB-mnth --> {{ result.BKPCapacity * result.backupCostGCPStorage
+                                    | currency:'USD':true:'1.0-0' }}/mnth</td>
+                            </tr>
+                        </ng-container>
+
+
+                        <tr style="font-size: 130%;">
+                            <td style="color: lightslategray;
+                            font-size: smaller;">Network</td>
+                            <td>$0</td>
+                            <td>{{ result.azureNetworkCost | currency:'USD':true:'1.0-0' }}</td>
+                            <td>{{ result.awsNetworkCost | currency:'USD':true:'1.0-0' }}</td>
+                            <td>{{ result.gcpNetworkCost | currency:'USD':true:'1.0-0' }}</td>
+                        </tr>
+                    </ng-container>
+                    <tr style="font-size: 130%;">
+                        <td>
+                            <a (click)="toggleDiscountedPricing()">
+                                <b>Discounted Price</b>
+                                <span [tooltip]="d" class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <b>NA</b>
+                        </td>
+                        <td>
+                            <b>{{RISUAzureDiscountedPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{RISUAWSDiscountedPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{RISUGCPDiscountedPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+
+                    </tr>
+                    <ng-container *ngIf="ExpandDiscountedPrice">
+                        <tr style="font-size: 120%;">
+                            <td>Enterprise Discounts&nbsp;</td>
+                            <td>NA</td>
+                            <td>{{AzureFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{AWSFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{GCPFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+                        </tr>
+                        <tr style="font-size: 120%;">
+                            <td>Reserved Instance/Sustained Usage&nbsp;</td>
+                            <td>NA</td>
+                            <td>{{RISUAzureDiscountedPrice | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{RISUAWSDiscountedPrice | currency:'USD':true:'1.0-0'}}</td>
+                            <td>{{RISUGCPDiscountedPrice | currency:'USD':true:'1.0-0'}}</td>
+
+                        </tr>
+                    </ng-container>
+                    <tr style="font-size: 130%;">
+                        <td>
+                            <b>Auto-Scaling Pricing</b>&nbsp;
+                            <span [tooltip]="a" class="glyphicon glyphicon-info-sign"></span>
+                        </td>
+                        <td>
+                            <b>{{ bbyAutoScalingPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{azureAutoScalingPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{awsAutoScalingPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+                        <td>
+                            <b>{{gcpAutoScalingPrice | currency:'USD':true:'1.0-0'}}</b>
+                        </td>
+
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            <b>Elasticity Savings (compute/month)</b>
+                        </td>
+                        <td>NA</td>
+                        <td>-{{result.AzureSavingsPerMonthTotal | currency:'USD':true:'1.0-0'}}</td>
+                        <td>-{{result.AWSSavingsPerMonthTotal | currency:'USD':true:'1.0-0'}}</td>
+                        <td>-{{result.GCPSavingsPerMonthtotal | currency:'USD':true:'1.0-0'}}</td>
+
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            <b>DBaas Savings (compute/month)</b>
+                        </td>
+                        <td>NA</td>
+                        <td>-{{result.PaSSAzureSavingsPerMonthTotal | currency:'USD':true:'1.0-0'}}</td>
+                        <td>-{{result.PaSSAWSSavingsPerMonthTotal | currency:'USD':true:'1.0-0'}}</td>
+                        <td>-{{result.PaSSGCPSavingsPerMonthtotal | currency:'USD':true:'1.0-0'}}</td>
+
+                    </tr>
+
+                    <tr hidden>
+                        <td>
+                            <b>Total</b>
+                        </td>
+                        <td>{{result.TotalPerServerTotalPerType | currency:'USD':true:'1.0-0'}}</td>
+                        <td>{{result.AzureTOTALPerServerTotalPerType -result.AzureSavingsPerMonthTotal - result.PaSSAzureSavingsPerMonthTotal
+                            -result.AzureFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+                        <td>{{result.AWSTOTALPerServerTotalPerType -result.AWSSavingsPerMonthTotal - result.PaSSAWSSavingsPerMonthTotal
+                            -result.AWSFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+                        <td>{{result.GCPTOTALPerServerTotalPerType -result.GCPSavingsPerMonthtotal - result.PaSSGCPSavingsPerMonthtotal
+                            -result.GCPFinalDiscounts | currency:'USD':true:'1.0-0'}}</td>
+
+                    </tr>
+                </table>
+                <h5 style="padding-right: 60px;">*The discounted pricing does not reflect the purchase of Reserved Instances (RI). RI's can reduce the cost
+                    of a VM between 30-70% depending on the size and paying for a 1-3 year commitment.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="row myrow">
+        <!-- <button type="button" class="btn btn-primary" (click)="cancel()">
+                <span class="glyphicon glyphicon-step-backward"></span> Back
+            </button> &nbsp;&nbsp; -->
+        <button type="button" class="btn btn-primary" (click)="assessmentHomeClick();">Assessment Home</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="infoAppDetailsClick();">1: Info About The App</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="decisionMatrixClick();">2: Decision Matrix</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="hostingCalculatorClick();">3: Hosting Calculator</button> &nbsp;&nbsp;
+        <!-- <button type="button" class="btn btn-primary" (click)="print('print-section')"> Print </button> -->
+
+    </div>
+    <hr>
+    <div class="buttons">
+        <button type="button" class="btn btn-primary" (click)="cancel()">
+            <span class="glyphicon glyphicon-step-backward"></span> Back
+        </button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="print('print-section')"> Print </button>
+    </div>
+</div>
+
+<br>
+<br>
+
+<tooltip-content #d>
+    <b>
+        <span>Each Cloud Service Provider has its own
+            <br> system of discounts and/or negotiated pricing.
+            <br> Some examples include Reserved Instances(RI)
+            <br> Discounts, Pay Upfront discounts, committed
+            <br> spend discounts, EA discounts, etc.
+            <br> This row shows pricing after cumulative
+            <br> discount got applied.
+            <br> (*Discounts are applied to Published Pricing)</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #a>
+    <b>
+        <span>In traditional datacenter many resources
+            <br> are designed for peak load but remain
+            <br> underutilized for some portion of the year
+            <br> due to variable demand. New, elastic
+            <br> platforms such as IaaS or PaaS allow to
+            <br> minimize underutilization percentage and
+            <br> provide necessary resources only when needed.
+            <br> This row shows potential reduction in cost when
+            <br> using Auto-scaling feature of the cloud,
+            <br> either private or public.
+            <br> (*Auto-Scaling Pricing is calculated based
+            <br> on Discounted and not Published Pricing)
+        </span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r1>
+    <b>
+        <span>Lift and shift app to deploy on the Public Cloud
+            <br>on an IaaS Service Model.</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r2>
+    <b>
+        <span>Lift and reshape app’s underlying infrastructure to
+            <br>deploy on the Public cloud on an IaaS Service Model.</span>
+    </b>
+</tooltip-content>
+
+
+<tooltip-content #r3>
+    <b>
+        <span>Rewrite or redesign app code and infrastructure
+            <br>to optimize for PaaS Service Model.</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r4>
+    <b>
+        <span>Replace app with a publicly
+            <br>available SaaS solution.</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r5>
+    <b>
+        <span>App to be modified for deployment
+            <br>in Public and Private clouds.</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r6>
+    <b>
+        <span>Lift and reshape app’s underlying infrastructure to
+            <br>deploy on the Internal Cloud Platform (IaaS).</span>
+    </b>
+</tooltip-content>
+
+<tooltip-content #r7>
+    <b>
+        <span>Rewrite or redesign app code and infrastructure
+            <br>to optimize for PaaS Services available internally.</span>
+    </b>
+</tooltip-content>

@@ -1,0 +1,27 @@
+hr.wide {
+    border-width: 2px !important;
+}
+
+button {
+    height: 35px;
+    border-radius: 4px;
+     
+  }
+
+.subbtn, .delbtn {
+    margin-left: 10px;
+    
+}
+
+.calcebtn {
+   margin-top: 10px;
+}
+
+h3 {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+div.buttons {
+    margin-left: 6px;
+}
