@@ -28,7 +28,7 @@
     "express": "~4.14.0",
     "hbs": "~3.1.0",
     "jsonwebtoken": "^7.4.2",
-    "mongoose": "^4.4.12",
+    "mongoose": "^7.6.3",
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "~1.6.1",
     "ng2-bs3-modal": "^0.10.4",
